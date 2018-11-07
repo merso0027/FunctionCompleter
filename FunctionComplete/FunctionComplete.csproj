@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IFunctionRepository.cs" />
+    <Compile Include="Repository\FunctionRepository.cs" />
     <Compile Include="TokenCompleter.cs" />
     <Compile Include="Models\Argument.cs" />
     <Compile Include="Models\FunctionSignature.cs" />
