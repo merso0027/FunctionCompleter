@@ -44,7 +44,7 @@
     <Compile Include="Models\Argument.cs" />
     <Compile Include="Models\FunctionSignature.cs" />
     <Compile Include="Services\FunctionCompleteService.cs" />
-    <Compile Include="Services\FunctionRepository.cs" />
+    <Compile Include="Services\FunctionParserService.cs" />
     <Compile Include="Services\FunctionSignatureService.cs" />
     <Compile Include="Services\TokenValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

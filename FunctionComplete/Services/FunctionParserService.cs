@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace FunctionComplete.Services
 {
-    public class FunctionRepository
+    public class FunctionParserService
     {
         private List<string> readRawFunctionsFromFile()
         {
@@ -20,7 +20,7 @@ namespace FunctionComplete.Services
             return res;
         }
 
-        public IList<FunctionSignature> GetCleanFunctions()
+        public List<FunctionSignature> GetCleanFunctions()
         {
             var raw = readRawFunctionsFromFile();
             var cleanRaw = cleanRawFunctions(raw);
@@ -52,7 +52,7 @@ namespace FunctionComplete.Services
             return true;
         }
 
-        public List<FunctionSignature> ParseFunctionSignatures(List<string> signatrues)
+        private List<FunctionSignature> ParseFunctionSignatures(List<string> signatrues)
         {
             var res = new List<FunctionSignature>();
             foreach (var item in signatrues)

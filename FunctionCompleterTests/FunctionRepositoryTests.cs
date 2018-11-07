@@ -10,7 +10,7 @@ namespace FunctionCompleterTests
         [TestMethod]
         public void TestMethod1()
         {
-            var functionRepository = new FunctionRepository();
+            var functionRepository = new FunctionParserService();
             functionRepository.GetCleanFunctions();
         }
     }
