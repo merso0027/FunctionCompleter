@@ -1,4 +1,6 @@
-﻿using FunctionComplete.Services;
+﻿using FunctionComplete.Interfaces;
+using FunctionComplete.Repository;
+using FunctionComplete.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,12 @@ namespace FunctionCompleterTests
     [TestClass]
     public class FunctionParserServiceTests
     {
+        private FunctionParserService functionParserService;
+        public FunctionParserServiceTests()
+        {
+            IFunctionRepository functionRepository = new FunctionRepository();
+            functionParserService = new FunctionParserService(functionRepository);
+        }
         [TestMethod]
         public void TestMethod1()
         {

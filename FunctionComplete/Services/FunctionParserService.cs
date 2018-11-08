@@ -65,17 +65,20 @@ namespace FunctionComplete.Services
             int functionEndIndex = signature.IndexOf(")");
             string allArguments = signature.Substring(functionStartIndex + 1, functionEndIndex - functionStartIndex - 1);
 
-            string[] functionParameters = allArguments.Split(',');
             var arguments = new List<Argument>();
-            foreach (var item in functionParameters)
+            if (allArguments != string.Empty)
             {
-                var type = item.Split(' ')[0];
-                var name = item.Split(' ')[1];
-                arguments.Add(new Argument()
+                string[] functionParameters = allArguments.Split(',');
+                foreach (var item in functionParameters)
                 {
-                    Name = name,
-                    Type = type
-                });
+                    var type = item.Split(' ')[0];
+                    var name = item.Split(' ')[1];
+                    arguments.Add(new Argument()
+                    {
+                        Name = name,
+                        Type = type
+                    });
+                }
             }
 
             return new FunctionSignature()

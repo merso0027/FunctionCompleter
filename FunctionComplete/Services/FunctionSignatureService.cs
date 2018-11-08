@@ -41,7 +41,9 @@ namespace FunctionComplete.Services
 
         public List<String> GetFunctionSignatures(string functionToken, List<FunctionSignature> functions)
         {
-            return functions.Where(t => t.Name.StartsWith(functionToken))
+            if (functionToken == string.Empty) return new List<string>();
+
+            return functions.Where(t => t.Name == functionToken)
                .Select(b => b.Signature)
                .ToList();
         }

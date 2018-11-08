@@ -11,10 +11,14 @@ namespace FunctionCompleterTests
     [TestClass]
     public class FunctionCompleteServiceTests
     {
+        FunctionCompleteService functionCompleteService;
+        public FunctionCompleteServiceTests() {
+            functionCompleteService = new FunctionCompleteService();
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
-            FunctionCompleteService functionCompleteService = new FunctionCompleteService();
             var res = functionCompleteService.GetCurrentFunctionName("Hello");
 
             Assert.AreEqual("Hello", res);
@@ -23,7 +27,6 @@ namespace FunctionCompleterTests
         [TestMethod]
         public void TestMethod2()
         {
-            FunctionCompleteService functionCompleteService = new FunctionCompleteService();
             var res = functionCompleteService.GetCurrentFunctionName("Hello(hej");
 
             Assert.AreEqual("hej", res);
@@ -32,7 +35,6 @@ namespace FunctionCompleterTests
         [TestMethod]
         public void TestMethod3()
         {
-            FunctionCompleteService functionCompleteService = new FunctionCompleteService();
             var res = functionCompleteService.GetCurrentFunctionName("Hello(hej,jes");
 
             Assert.AreEqual("jes", res);
@@ -41,7 +43,6 @@ namespace FunctionCompleterTests
         [TestMethod]
         public void TestMethod4()
         {
-            FunctionCompleteService functionCompleteService = new FunctionCompleteService();
             var res = functionCompleteService.GetCurrentFunctionName("a=trala");
 
             Assert.AreEqual("trala", res);
