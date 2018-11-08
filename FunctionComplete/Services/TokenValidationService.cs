@@ -10,7 +10,7 @@ namespace FunctionComplete.Services
     {
         public bool IsTokenValid(string token)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

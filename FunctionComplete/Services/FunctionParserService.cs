@@ -11,13 +11,14 @@ namespace FunctionComplete.Services
     {
         private IFunctionRepository functionRepository;
 
-        public FunctionParserService(IFunctionRepository functionRepository) {
+        public FunctionParserService(IFunctionRepository functionRepository)
+        {
             this.functionRepository = functionRepository;
         }
 
-        public List<FunctionSignature> GetCleanFunctions()
+        public List<FunctionSignature> GetAllFunctions()
         {
-            var raw = functionRepository.ReadRawFunctionsFromFile();
+            var raw = functionRepository.GetRawFunctions();
             var cleanRaw = cleanRawFunctions(raw);
             var res = ParseFunctionSignatures(cleanRaw);
             return res;
@@ -79,6 +80,7 @@ namespace FunctionComplete.Services
 
             return new FunctionSignature()
             {
+                Signature = signature,
                 Name = functionName,
                 Arguments = arguments
             };

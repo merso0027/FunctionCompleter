@@ -10,7 +10,7 @@ namespace FunctionComplete.Repository
 {
     public class FunctionRepository: IFunctionRepository
     {
-        public List<string> ReadRawFunctionsFromFile()
+        public List<string> GetRawFunctions()
         {
             var path = Directory.GetCurrentDirectory() + "\\Data\\AvailableFunctions.txt";
             var lines = File.ReadLines(path);

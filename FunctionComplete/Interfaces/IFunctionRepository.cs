@@ -5,6 +5,6 @@ namespace FunctionComplete.Interfaces
 {
     public interface IFunctionRepository
     {
-        List<string> ReadRawFunctionsFromFile();
+        List<string> GetRawFunctions();
     }
 }

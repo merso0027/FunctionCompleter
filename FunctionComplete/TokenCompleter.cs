@@ -1,6 +1,9 @@
-﻿using FunctionComplete.Services;
+﻿using FunctionComplete.Interfaces;
+using FunctionComplete.Models;
+using FunctionComplete.Services;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace FunctionComplete
 {
@@ -12,25 +15,30 @@ namespace FunctionComplete
 
         private TokenValidationService tokenValidationService;
 
-        public TokenCompleter()
+        private FunctionParserService functionService;
+
+        public TokenCompleter(IFunctionRepository functionRepository)
         {
             functionCompleteService = new FunctionCompleteService();
             functionSignatureService = new FunctionSignatureService();
             tokenValidationService = new TokenValidationService();
+            functionService = new FunctionParserService(functionRepository);
         }
 
         public Tuple<List<string>, List<string>> Complete(string token)
         {
-            if (tokenValidationService.IsTokenValid(token))
+            string cleanToken = Regex.Replace(token, @"\s+", "");
+            if (!tokenValidationService.IsTokenValid(cleanToken))
             {
                 throw new NotImplementedException();
             }
+            List<FunctionSignature> functions = functionService.GetAllFunctions();
 
-            var currentFunction = functionCompleteService.GetCurrentFunction(token);
-            var currentWholeFunction = functionSignatureService.GetWholeCurrentFunction(token);
+            var currentFunction = functionCompleteService.GetCurrentFunctionName(cleanToken);
+            var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
 
-            var complete = functionCompleteService.GetFunctionComplete(token);
-            var suggest = functionSignatureService.GetFunctionSignatures(token);
+            var complete = functionCompleteService.GetFunctionComplete(currentFunction, functions);
+            var suggest = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
 
             return new Tuple<List<string>, List<string>>(complete, suggest);
         }

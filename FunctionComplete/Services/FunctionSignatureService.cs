@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FunctionComplete.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +9,41 @@ namespace FunctionComplete.Services
 {
     public class FunctionSignatureService
     {
-        public bool HasFunction(string token)
+        private FunctionCompleteService functionCompleteService;
+
+        public FunctionSignatureService()
         {
-            throw new NotImplementedException();
+            functionCompleteService = new FunctionCompleteService();
         }
 
-        public string GetWholeCurrentFunction(string token)
+        public string GetWholeCurrentFunctionName(string token)
         {
-            throw new NotImplementedException();
+            char[] array = token.ToCharArray();
+
+            int openParenthesisCount = 0;
+            int closedParenthesisCount = 0;
+            int indexWhereWholeFunctionEnds = 0;
+            for (int i = array.Length - 1; i != 0; i--)
+            {
+                if (array[i] == ')') closedParenthesisCount++;
+                if (array[i] == '(') openParenthesisCount++;
+
+                if (openParenthesisCount > closedParenthesisCount)
+                {
+                    indexWhereWholeFunctionEnds = i;
+                    break;
+                }
+            }
+            string tokenToWholeFunction = token.Substring(0, indexWhereWholeFunctionEnds);
+            var res = functionCompleteService.GetCurrentFunctionName(tokenToWholeFunction);
+            return res;
         }
 
-        public List<String> GetFunctionSignatures(string functionName)
+        public List<String> GetFunctionSignatures(string functionToken, List<FunctionSignature> functions)
         {
-            throw new NotImplementedException();
+            return functions.Where(t => t.Name.StartsWith(functionToken))
+               .Select(b => b.Signature)
+               .ToList();
         }
     }
 }

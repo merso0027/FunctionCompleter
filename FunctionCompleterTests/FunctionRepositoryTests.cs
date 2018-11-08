@@ -14,7 +14,7 @@ namespace FunctionCompleterTests
         {
             IFunctionRepository functionRepository = new FunctionRepository();
             var functionParserService = new FunctionParserService(functionRepository);
-            functionParserService.GetCleanFunctions();
+            functionParserService.GetAllFunctions();
         }
     }
 }

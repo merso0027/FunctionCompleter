@@ -15,6 +15,8 @@ namespace FunctionComplete.Models
 
         public string Name { get; set; }
 
+        public string Signature { get; set; }
+
         public IList<Argument> Arguments { get; set; }
     }
 }

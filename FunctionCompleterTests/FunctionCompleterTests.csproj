@@ -48,8 +48,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FunctionCompleteServiceTests.cs" />
+    <Compile Include="FunctionParserServiceTests.cs" />
     <Compile Include="FunctionRepositoryTests.cs" />
+    <Compile Include="FunctionSignatureServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TokenCompleterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
