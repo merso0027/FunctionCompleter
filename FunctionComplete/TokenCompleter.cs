@@ -27,9 +27,13 @@ namespace FunctionComplete
             functionService = new FunctionParserService(functionRepository);
         }
 
-        public Tuple<List<string>, List<string>> Complete(string token)
+        public Suggestions Run(string token)
         {
             string cleanToken = Regex.Replace(token, @"\s+", "");
+            if (cleanToken == string.Empty)
+            {
+                return new Suggestions();
+            }
             if (!tokenValidationService.IsTokenValid(cleanToken))
             {
                 throw new NotImplementedException();
@@ -38,11 +42,17 @@ namespace FunctionComplete
 
             var currentFunction = functionCompleteService.GetCurrentFunctionName(cleanToken);
             var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
+            var tokenToFunction = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
 
             var complete = functionCompleteService.GetFunctionComplete(currentFunction, functions);
-            var suggest = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
+            var signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
 
-            return new Tuple<List<string>, List<string>>(complete, suggest);
+            return new Suggestions()
+            {
+                Complete = complete,
+                Signatures = signatures,
+                TokenToCurrent = tokenToFunction
+            };
         }
     }
 }

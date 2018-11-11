@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +6,7 @@ using System.Windows.Input;
 using System.IO;
 using System.Windows.Controls.Primitives;
 using FunctionComplete;
+using FunctionComplete.Models;
 
 namespace QuickZip.Controls
 {
@@ -23,9 +23,12 @@ namespace QuickZip.Controls
 
         private bool _loaded = false;
         string lastPath;
+        private TokenCompleter _tokenCompleter;
+        private Suggestions _suggestions;
 
         public SuggestFunctionTextBox()
         {
+            _tokenCompleter = new TokenCompleter();
             InitializeComponent();
         }
 
@@ -107,7 +110,7 @@ namespace QuickZip.Controls
                 switch (e.Key)
                 {
                     case Key.Enter:
-                        Text = "damir" + (tb.Content as string) + "(";
+                        Text = _suggestions.TokenToCurrent + (tb.Content as string) + "(";
                         updateSource();
                         break;
                     default:
@@ -162,16 +165,12 @@ namespace QuickZip.Controls
                 try
                 {
                     {
-                        Tuple<List<string>, List<string>> tokenCompleter = new TokenCompleter().Complete(this.Text);
-                        var complete = tokenCompleter.Item1;
-
+                        _suggestions = _tokenCompleter.Run(this.Text);
                         ItemList.Items.Clear();
-                        foreach (string value in complete)
+                        foreach (string value in _suggestions.Complete)
                             if (!(String.Equals(value, this.Text, StringComparison.CurrentCultureIgnoreCase)))
                                 ItemList.Items.Add(value);
                     }
-
-
                     Popup.IsOpen = ItemList.Items.Count > 0;
                 }
                 catch
@@ -179,27 +178,6 @@ namespace QuickZip.Controls
 
                 }
             }
-        }
-
-
-        private string[] Lookup(string path)
-        {
-            try
-            {
-                if (Directory.Exists(Path.GetDirectoryName(path)))
-                {
-                    DirectoryInfo lookupFolder = new DirectoryInfo(Path.GetDirectoryName(path));
-                    if (lookupFolder != null)
-                    {
-                        DirectoryInfo[] AllItems = lookupFolder.GetDirectories();
-                        return (from di in AllItems where di.FullName.StartsWith(path, StringComparison.CurrentCultureIgnoreCase) select di.FullName).ToArray();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return new string[0];
         }
     }
 }

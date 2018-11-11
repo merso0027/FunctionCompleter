@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IFunctionRepository.cs" />
+    <Compile Include="Models\Suggestions.cs" />
     <Compile Include="Repository\FunctionRepository.cs" />
     <Compile Include="TokenCompleter.cs" />
     <Compile Include="Models\Argument.cs" />
