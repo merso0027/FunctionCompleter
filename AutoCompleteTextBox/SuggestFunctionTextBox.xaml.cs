@@ -5,8 +5,6 @@ using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using FunctionComplete;
 using FunctionComplete.Models;
-using System.Windows.Media;
-using System.Windows.Documents;
 
 namespace Controls
 {
