@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.IO;
 using System.Windows.Controls.Primitives;
-using System.Diagnostics;
 using FunctionComplete;
-using AutoCompleteTextBox;
 
 namespace QuickZip.Controls
 {
@@ -115,16 +107,12 @@ namespace QuickZip.Controls
                 switch (e.Key)
                 {
                     case Key.Enter:
-                        Text = "damir" +  (tb.Content as string) + "("; updateSource(); break;
-                    //12-25-08 - added "\" support when picking in list view
-                    case Key.Oem5:
-                        Text = (tb.Content as string) + "\\";
+                        Text = "damir" + (tb.Content as string) + "(";
+                        updateSource();
                         break;
-                    //12-25-08 - roll back if escape is pressed
-                    case Key.Escape:
-                        Text = lastPath.TrimEnd('\\') + "\\";
+                    default:
+                        e.Handled = false;
                         break;
-                    default: e.Handled = false; break;
                 }
                 //12-25-08 - Force focus back the control after selected.
                 if (e.Handled)
@@ -172,7 +160,7 @@ namespace QuickZip.Controls
             if (_loaded)
             {
                 try
-                {                       
+                {
                     {
                         Tuple<List<string>, List<string>> tokenCompleter = new TokenCompleter().Complete(this.Text);
                         var complete = tokenCompleter.Item1;
