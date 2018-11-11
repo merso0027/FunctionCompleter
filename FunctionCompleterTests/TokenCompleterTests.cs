@@ -33,7 +33,7 @@ namespace FunctionCompleterTests
             var mockFunctionRepository = new Mock<IFunctionRepository>();
             mockFunctionRepository.Setup(f => f.GetRawFunctions())
                 .Returns(repoData);
-            tokenCompleter = new TokenCompleter(mockFunctionRepository.Object);
+            tokenCompleter = new TokenCompleter();
         }
 
         [TestMethod]

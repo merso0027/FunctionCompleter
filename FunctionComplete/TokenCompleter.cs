@@ -1,5 +1,6 @@
 ﻿using FunctionComplete.Interfaces;
 using FunctionComplete.Models;
+using FunctionComplete.Repository;
 using FunctionComplete.Services;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,9 @@ namespace FunctionComplete
 
         private FunctionParserService functionService;
 
-        public TokenCompleter(IFunctionRepository functionRepository)
+        public TokenCompleter()
         {
+            IFunctionRepository functionRepository = new FunctionRepository();
             functionCompleteService = new FunctionCompleteService();
             functionSignatureService = new FunctionSignatureService();
             tokenValidationService = new TokenValidationService();

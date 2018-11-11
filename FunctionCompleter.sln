@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionCompleterTests", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionComplete", "FunctionComplete\FunctionComplete.csproj", "{A4C0A43E-7533-424B-BE49-6A759F44B140}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCompleteTextBox", "AutoCompleteTextBox\AutoCompleteTextBox.csproj", "{E095BDC0-B57F-4CB2-9AFC-9CC9F0A9E1D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A4C0A43E-7533-424B-BE49-6A759F44B140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4C0A43E-7533-424B-BE49-6A759F44B140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4C0A43E-7533-424B-BE49-6A759F44B140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E095BDC0-B57F-4CB2-9AFC-9CC9F0A9E1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E095BDC0-B57F-4CB2-9AFC-9CC9F0A9E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E095BDC0-B57F-4CB2-9AFC-9CC9F0A9E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E095BDC0-B57F-4CB2-9AFC-9CC9F0A9E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
