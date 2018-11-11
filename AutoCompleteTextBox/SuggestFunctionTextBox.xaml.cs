@@ -39,6 +39,7 @@ namespace Controls
             Popup.CustomPopupPlacementCallback += new CustomPopupPlacementCallback(Repositioning);
 
             Window parentWindow = getParentWindow();
+           
             if (parentWindow != null)
             {
                 parentWindow.Deactivated += delegate { prevState = Popup.IsOpen; Popup.IsOpen = false; };
@@ -150,19 +151,6 @@ namespace Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             _suggestions = _tokenCompleter.Run(this.Text);
-            TextBlock textBlock1 = new TextBlock();
-            TextBlock textBlock2 = new TextBlock();
-
-            textBlock1.TextWrapping = textBlock2.TextWrapping = TextWrapping.Wrap;
-            textBlock2.Background = Brushes.AntiqueWhite;
-            textBlock2.TextAlignment = TextAlignment.Center;
-
-            textBlock1.Inlines.Add(new Bold(new Run("TextBlock")));
-            textBlock1.Inlines.Add(new Run(" is designed to be "));
-            textBlock1.Inlines.Add(new Italic(new Run("lightweight")));
-            textBlock1.Inlines.Add(new Run(", and is geared specifically at integrating "));
-            textBlock1.Inlines.Add(new Italic(new Run("small")));
-            textBlock1.Inlines.Add(new Run(" portions of flow content into a UI."));
 
             ItemList.Items.Clear();
             foreach (string value in _suggestions.Complete)
