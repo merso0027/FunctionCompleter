@@ -6,7 +6,7 @@
     <DockPanel>
         <Border BorderBrush="Silver" BorderThickness="1" Padding="2" DockPanel.Dock="Bottom">
             <DockPanel >
-                <local:SelectFolderTextBox  DockPanel.Dock="Bottom" Margin="4,0,0,0"/>
+                <local:SuggestFunctionTextBox  DockPanel.Dock="Bottom" Margin="4,0,0,0"/>
                 <Label Content="_Enter Path" Target="{Binding ElementName=stb}"  />
             </DockPanel>
         </Border>

@@ -21,7 +21,7 @@ namespace QuickZip.Controls
     /// <summary>
     /// Interaction logic for SelectFolderTextBox.xaml
     /// </summary>
-    public partial class SelectFolderTextBox : TextBox
+    public partial class SuggestFunctionTextBox : TextBox
     {
         Popup Popup { get { return this.Template.FindName("PART_Popup", this) as Popup; } }
         ListBox ItemList { get { return this.Template.FindName("PART_ItemList", this) as ListBox; } }
@@ -32,7 +32,7 @@ namespace QuickZip.Controls
         private bool _loaded = false;
         string lastPath;
 
-        public SelectFolderTextBox()
+        public SuggestFunctionTextBox()
         {
             InitializeComponent();
         }
