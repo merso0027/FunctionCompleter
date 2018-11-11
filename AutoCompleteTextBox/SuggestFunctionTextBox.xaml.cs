@@ -21,8 +21,6 @@ namespace QuickZip.Controls
         ScrollViewer Host { get { return this.Template.FindName("PART_ContentHost", this) as ScrollViewer; } }
         UIElement TextBoxView { get { foreach (object o in LogicalTreeHelper.GetChildren(Host)) return o as UIElement; return null; } }
 
-        private bool _loaded = false;
-        string lastPath;
         private TokenCompleter _tokenCompleter;
         private Suggestions _suggestions;
 
@@ -38,7 +36,6 @@ namespace QuickZip.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _loaded = true;
             this.KeyDown += new KeyEventHandler(AutoCompleteTextBox_KeyDown);
             this.PreviewKeyDown += new KeyEventHandler(AutoCompleteTextBox_PreviewKeyDown);
             ItemList.PreviewMouseDown += new MouseButtonEventHandler(ItemList_PreviewMouseDown);
@@ -150,8 +147,10 @@ namespace QuickZip.Controls
                 TextBlock tb = e.OriginalSource as TextBlock;
                 if (tb != null)
                 {
-                    Text = tb.Text;
+                    Text = _suggestions.TokenToCurrent + (tb.Text as string) + "(";
                     updateSource();
+                    SelectionStart = Text.Length;
+                    SelectionLength = 0;
                     Popup.IsOpen = false;
                     e.Handled = true;
                 }
@@ -160,24 +159,12 @@ namespace QuickZip.Controls
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
-            if (_loaded)
-            {
-                try
-                {
-                    {
-                        _suggestions = _tokenCompleter.Run(this.Text);
-                        ItemList.Items.Clear();
-                        foreach (string value in _suggestions.Complete)
-                            if (!(String.Equals(value, this.Text, StringComparison.CurrentCultureIgnoreCase)))
-                                ItemList.Items.Add(value);
-                    }
-                    Popup.IsOpen = ItemList.Items.Count > 0;
-                }
-                catch
-                {
-
-                }
-            }
+            _suggestions = _tokenCompleter.Run(this.Text);
+            ItemList.Items.Clear();
+            foreach (string value in _suggestions.Complete)
+                if (!(String.Equals(value, this.Text, StringComparison.CurrentCultureIgnoreCase)))
+                    ItemList.Items.Add(value);
+            Popup.IsOpen = ItemList.Items.Count > 0;
         }
     }
 }
