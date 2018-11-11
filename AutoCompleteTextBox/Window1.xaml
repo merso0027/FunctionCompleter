@@ -8,9 +8,8 @@
         <Border BorderBrush="Silver" BorderThickness="1" Padding="2" DockPanel.Dock="Bottom">
             <DockPanel >
                 <local:SuggestFunctionTextBox  DockPanel.Dock="Bottom" Margin="4,0,0,0"/>
-                <Label Content="_Enter Path" Target="{Binding ElementName=stb}"  />
+                <Label x:Name="label1" Content="Complete" Target="{Binding ElementName=stb}"  />
             </DockPanel>
         </Border>
-        <TextBlock Text="{Binding Text}" />
     </DockPanel>
 </Window>

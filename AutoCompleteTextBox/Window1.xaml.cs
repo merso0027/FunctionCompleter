@@ -15,26 +15,6 @@ using System.ComponentModel;
 
 namespace AutoCompleteTextBox
 {
-
-    public class Model : INotifyPropertyChanged
-    {
-        string _text;
-        public string Text { get { return _text; } set { _text = value; OnPropertyChanged("Text"); } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(
-                    this,
-                    new PropertyChangedEventArgs(propertyName)
-                    );
-            }
-        }
-    }
-
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
@@ -45,7 +25,6 @@ namespace AutoCompleteTextBox
         public Window1()
         {
             InitializeComponent();
-            DataContext = new Model();
         }
     }
 }
