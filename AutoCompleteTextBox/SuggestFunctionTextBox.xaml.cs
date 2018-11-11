@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.IO;
 using System.Windows.Controls.Primitives;
 using FunctionComplete;
 using FunctionComplete.Models;
 
 namespace QuickZip.Controls
 {
-    /// <summary>
-    /// Interaction logic for SelectFolderTextBox.xaml
-    /// </summary>
     public partial class SuggestFunctionTextBox : TextBox
     {
         Popup Popup { get { return this.Template.FindName("PART_Popup", this) as Popup; } }
@@ -30,7 +25,6 @@ namespace QuickZip.Controls
             InitializeComponent();
         }
 
-
         private bool prevState = false;
 
         public override void OnApplyTemplate()
@@ -42,15 +36,12 @@ namespace QuickZip.Controls
             ItemList.KeyDown += new KeyEventHandler(ItemList_KeyDown);
             Popup.CustomPopupPlacementCallback += new CustomPopupPlacementCallback(Repositioning);
 
-
             Window parentWindow = getParentWindow();
             if (parentWindow != null)
             {
                 parentWindow.Deactivated += delegate { prevState = Popup.IsOpen; Popup.IsOpen = false; };
                 parentWindow.Activated += delegate { Popup.IsOpen = prevState; };
             }
-
-
         }
 
         private Window getParentWindow()
@@ -90,7 +81,6 @@ namespace QuickZip.Controls
                         lbi.Focus();
                         e.Handled = true;
                         break;
-
                 }
         }
 
@@ -99,9 +89,7 @@ namespace QuickZip.Controls
         {
             if (e.OriginalSource is ListBoxItem)
             {
-
                 ListBoxItem tb = e.OriginalSource as ListBoxItem;
-
                 e.Handled = true;
                 var d = Text;
                 switch (e.Key)
@@ -160,10 +148,16 @@ namespace QuickZip.Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             _suggestions = _tokenCompleter.Run(this.Text);
+
+
             ItemList.Items.Clear();
             foreach (string value in _suggestions.Complete)
+            {
                 if (!(String.Equals(value, this.Text, StringComparison.CurrentCultureIgnoreCase)))
+                {
                     ItemList.Items.Add(value);
+                }
+            }
             Popup.IsOpen = ItemList.Items.Count > 0;
         }
     }
