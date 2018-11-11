@@ -32,11 +32,8 @@
                                                      KeyboardNavigation.DirectionalNavigation="Cycle" />
                                         </Border>
                                     </Popup>
-
                                 </Grid>
                             </Border>
-
-
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
