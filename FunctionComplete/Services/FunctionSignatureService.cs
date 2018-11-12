@@ -16,6 +16,11 @@ namespace FunctionComplete.Services
             functionCompleteService = new FunctionCompleteService();
         }
 
+        /// <summary>
+        /// Get name of complete function. Function that is started, not finished by name is writen but without all parameters.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public string GetWholeCurrentFunctionName(string token)
         {
             char[] array = token.ToCharArray();
@@ -39,6 +44,12 @@ namespace FunctionComplete.Services
             return res;
         }
 
+        /// <summary>
+        /// Signatures of whole current function.
+        /// </summary>
+        /// <param name="functionToken">Token</param>
+        /// <param name="functions">All function names.</param>
+        /// <returns></returns>
         public List<String> GetFunctionSignatures(string functionToken, List<FunctionSignature> functions)
         {
             if (functionToken == string.Empty) return new List<string>();

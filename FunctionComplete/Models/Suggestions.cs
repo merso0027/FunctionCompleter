@@ -13,10 +13,21 @@ namespace FunctionComplete.Models
             Complete = new List<string>();
             Signatures = new List<string>();
         }
+
+        /// <summary>
+        /// Text before current function.
+        /// </summary>
         public string TokenToCurrent { get; set; }
 
+        /// <summary>
+        /// Suggestions for user how to complete function.
+        /// </summary>
         public List<string> Complete { get; set; }
 
+        /// <summary>
+        /// Signatures of functions. 
+        /// It can be more that once since function can be overloaded.
+        /// </summary>
         public List<string> Signatures { get; set; }
     }
 }

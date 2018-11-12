@@ -11,15 +11,16 @@ namespace Controls
 {
     public partial class SuggestFunctionTextBox : TextBox
     {
-        private Popup Popup { get { return this.Template.FindName("PART_Popup", this) as Popup; } }
-        private ListBox ItemList { get { return this.Template.FindName("PART_ItemList", this) as ListBox; } }
-        private Grid Root { get { return this.Template.FindName("root", this) as Grid; } }
-        private ScrollViewer Host { get { return this.Template.FindName("PART_ContentHost", this) as ScrollViewer; } }
+        private Popup Popup { get { return Template.FindName("PART_Popup", this) as Popup; } }
+        private ListBox ItemList { get { return Template.FindName("PART_ItemList", this) as ListBox; } }
+        private Grid Root { get { return Template.FindName("root", this) as Grid; } }
+        private ScrollViewer Host { get { return Template.FindName("PART_ContentHost", this) as ScrollViewer; } }
         private UIElement TextBoxView { get { foreach (object o in LogicalTreeHelper.GetChildren(Host)) return o as UIElement; return null; } }
 
         private TokenCompleter _tokenCompleter;
         private Suggestions _suggestions;
-        private ToolTip tooltipMethodDescriptions;
+        private ToolTip tooltipMethodSignatures;
+
         public SuggestFunctionTextBox()
         {
             _tokenCompleter = new TokenCompleter();
@@ -29,10 +30,10 @@ namespace Controls
 
         private void InitializeTooltip()
         {
-            tooltipMethodDescriptions = new ToolTip();
-            tooltipMethodDescriptions.PlacementTarget = this;
-            tooltipMethodDescriptions.Placement = PlacementMode.Top;
-            this.ToolTip = tooltipMethodDescriptions;
+            tooltipMethodSignatures = new ToolTip();
+            tooltipMethodSignatures.PlacementTarget = this;
+            tooltipMethodSignatures.Placement = PlacementMode.Top;
+            this.ToolTip = tooltipMethodSignatures;
         }
 
         public override void OnApplyTemplate()
@@ -77,7 +78,6 @@ namespace Controls
                 }
         }
 
-
         void ItemList_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.OriginalSource is ListBoxItem)
@@ -92,7 +92,7 @@ namespace Controls
                         updateSource();
                         break;
                     case Key.Escape:
-                        tooltipMethodDescriptions.IsOpen = false;
+                        tooltipMethodSignatures.IsOpen = false;
                         break;
                     default:
                         e.Handled = false;
@@ -144,7 +144,7 @@ namespace Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             _suggestions = _tokenCompleter.Run(this.Text);
-            tooltipMethodDescriptions.IsOpen = _suggestions.Signatures.Count > 0;
+            tooltipMethodSignatures.IsOpen = _suggestions.Signatures.Count > 0;
             string signatures = string.Empty;
             foreach (var item in _suggestions.Signatures)
             {
@@ -156,7 +156,7 @@ namespace Controls
                 signatures += item + Environment.NewLine;
             }
 
-            tooltipMethodDescriptions.Content = signatures;
+            tooltipMethodSignatures.Content = signatures;
             ItemList.Items.Clear();
             foreach (string value in _suggestions.Complete)
             {
