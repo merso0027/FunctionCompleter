@@ -1,5 +1,4 @@
-﻿using FunctionComplete.Interfaces;
-using FunctionComplete.Models;
+﻿using FunctionComplete.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,17 +8,15 @@ namespace FunctionComplete.Services
 {
     public class FunctionParserService
     {
-        private IFunctionRepository functionRepository;
-
-        public FunctionParserService(IFunctionRepository functionRepository)
+        private List<string> rawFunctions;
+        public FunctionParserService(List<string> rawFunctions)
         {
-            this.functionRepository = functionRepository;
+            this.rawFunctions = rawFunctions;
         }
 
         public List<FunctionSignature> GetAllFunctions()
         {
-            var raw = functionRepository.GetRawFunctions();
-            var cleanRaw = cleanRawFunctions(raw);
+            var cleanRaw = cleanRawFunctions(rawFunctions);
             var res = ParseFunctionSignatures(cleanRaw);
             return res;
         }

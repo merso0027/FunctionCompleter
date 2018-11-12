@@ -40,9 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IFunctionRepository.cs" />
     <Compile Include="Models\Suggestions.cs" />
-    <Compile Include="Repository\FunctionRepository.cs" />
     <Compile Include="TokenCompleter.cs" />
     <Compile Include="Models\Argument.cs" />
     <Compile Include="Models\FunctionSignature.cs" />
@@ -51,11 +49,6 @@
     <Compile Include="Services\FunctionSignatureService.cs" />
     <Compile Include="Services\TokenValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\AvailableFunctions.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

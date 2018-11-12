@@ -1,6 +1,4 @@
-﻿using FunctionComplete.Interfaces;
-using FunctionComplete.Models;
-using FunctionComplete.Repository;
+﻿using FunctionComplete.Models;
 using FunctionComplete.Services;
 using System;
 using System.Collections.Generic;
@@ -10,49 +8,41 @@ namespace FunctionComplete
 {
     public class TokenCompleter
     {
-        private FunctionCompleteService functionCompleteService;
+        private readonly FunctionCompleteService functionCompleteService;
+        private readonly FunctionSignatureService functionSignatureService;
+        private readonly TokenValidationService tokenValidationService;
+        private readonly List<FunctionSignature> functions;
 
-        private FunctionSignatureService functionSignatureService;
-
-        private TokenValidationService tokenValidationService;
-
-        private FunctionParserService functionService;
-
-        public TokenCompleter()
+        public TokenCompleter(List<string> rawFunctions)
         {
-            IFunctionRepository functionRepository = new FunctionRepository();
             functionCompleteService = new FunctionCompleteService();
             functionSignatureService = new FunctionSignatureService();
             tokenValidationService = new TokenValidationService();
-            functionService = new FunctionParserService(functionRepository);
+            var functionService = new FunctionParserService(rawFunctions);
+            functions = functionService.GetAllFunctions();
         }
 
         public Suggestions Run(string token)
         {
             string cleanToken = Regex.Replace(token, @"\s+", "");
-            if (cleanToken == string.Empty)
+            var result = new Suggestions();
+            if (string.IsNullOrWhiteSpace(cleanToken))
             {
-                return new Suggestions();
+                return result;
             }
+
             if (!tokenValidationService.IsTokenValid(cleanToken))
             {
                 throw new NotImplementedException();
             }
-            List<FunctionSignature> functions = functionService.GetAllFunctions();
 
             var currentFunction = functionCompleteService.GetCurrentFunctionName(cleanToken);
             var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
-            var tokenToFunction = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
 
-            var complete = functionCompleteService.GetFunctionComplete(currentFunction, functions);
-            var signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
-
-            return new Suggestions()
-            {
-                Complete = complete,
-                Signatures = signatures,
-                TokenToCurrent = tokenToFunction
-            };
+            result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
+            result.Complete = functionCompleteService.GetFunctionComplete(currentFunction, functions);
+            result.Signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
+            return result;
         }
     }
 }

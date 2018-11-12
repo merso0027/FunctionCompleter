@@ -1,10 +1,9 @@
-﻿using FunctionComplete.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
-namespace FunctionComplete.Repository
+namespace Repository
 {
-    public class FunctionRepository: IFunctionRepository
+    public class FunctionRepository
     {
         public List<string> GetRawFunctions()
         {
