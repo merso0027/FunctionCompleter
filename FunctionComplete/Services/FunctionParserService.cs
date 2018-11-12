@@ -12,6 +12,10 @@ namespace FunctionComplete.Services
             this.rawFunctions = rawFunctions;
         }
 
+        /// <summary>
+        /// Get all functions paresed from raw list.
+        /// </summary>
+        /// <returns>List of function signature objects.</returns>
         public List<FunctionSignature> GetAllFunctions()
         {
             var cleanRaw = cleanRawFunctions(rawFunctions);
@@ -19,12 +23,16 @@ namespace FunctionComplete.Services
             return res;
         }
 
+        /// <summary>
+        /// Clean raw data before parsing.
+        /// </summary>
+        /// <param name="rawFunctions">Raw functions list.</param>
+        /// <returns>Clean function list</returns>
         private List<string> cleanRawFunctions(List<string> rawFunctions)
         {
             var res = new List<string>();
             foreach (var item in rawFunctions)
             {
-                if (!isValid(item)) continue;
                 string cleanItem = item.Trim();
                 cleanItem = Regex.Replace(cleanItem, @"\s+", " ");
                 cleanItem = cleanItem.Replace("( ", "(");
@@ -38,11 +46,11 @@ namespace FunctionComplete.Services
             return res;
         }
 
-        private bool isValid(string function)
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Parse list of string functions to list of object function signatures.
+        /// </summary>
+        /// <param name="signatrues">List of clean string functions</param>
+        /// <returns></returns>
         private List<FunctionSignature> ParseFunctionSignatures(List<string> signatrues)
         {
             var res = new List<FunctionSignature>();
@@ -53,6 +61,11 @@ namespace FunctionComplete.Services
             return res;
         }
 
+        /// <summary>
+        /// Parse one function string signature to function object signature.
+        /// </summary>
+        /// <param name="signature">Function signature string</param>
+        /// <returns>Function signature object.</returns>
         private FunctionSignature ParseFunctionSignature(string signature)
         {
             string functionName = (signature.Split('(')[0]).Trim();
@@ -78,8 +91,8 @@ namespace FunctionComplete.Services
 
             return new FunctionSignature()
             {
-                Signature = signature,
-                Name = functionName,
+                SignatureText = signature,
+                FunctionName = functionName,
                 Arguments = arguments
             };
         }

@@ -41,7 +41,7 @@ namespace FunctionComplete
                 throw new NotImplementedException();
             }
 
-            var currentFunction = functionCompleteService.GetCurrentFunctionName(cleanToken);
+            var currentFunction = functionCompleteService.CurrentFunctionName(cleanToken);
             var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
 
             result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));

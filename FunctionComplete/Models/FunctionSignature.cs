@@ -13,14 +13,14 @@ namespace FunctionComplete.Models
         }
 
         /// <summary>
-        /// Function name
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
         /// Whole function signature
         /// </summary>
-        public string Signature { get; set; }
+        public string SignatureText { get; set; }
+
+        /// <summary>
+        /// Function name
+        /// </summary>
+        public string FunctionName { get; set; }
 
         /// <summary>
         /// All function arguments

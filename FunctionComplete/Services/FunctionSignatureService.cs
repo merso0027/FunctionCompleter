@@ -38,7 +38,7 @@ namespace FunctionComplete.Services
                 }
             }
             string tokenToWholeFunction = token.Substring(0, indexWhereWholeFunctionEnds);
-            var res = functionCompleteService.GetCurrentFunctionName(tokenToWholeFunction);
+            var res = functionCompleteService.CurrentFunctionName(tokenToWholeFunction);
             return res;
         }
 
@@ -52,8 +52,8 @@ namespace FunctionComplete.Services
         {
             if (functionToken == string.Empty) return new List<string>();
 
-            return functions.Where(t => t.Name == functionToken)
-               .Select(b => b.Signature)
+            return functions.Where(t => t.FunctionName == functionToken)
+               .Select(b => b.SignatureText)
                .ToList();
         }
     }
