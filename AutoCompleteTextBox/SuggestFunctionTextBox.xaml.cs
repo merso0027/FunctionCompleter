@@ -86,7 +86,6 @@ namespace Controls
             {
                 ListBoxItem tb = e.OriginalSource as ListBoxItem;
                 e.Handled = true;
-                var d = Text;
                 switch (e.Key)
                 {
                     case Key.Enter:
