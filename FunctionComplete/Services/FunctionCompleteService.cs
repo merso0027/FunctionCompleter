@@ -7,6 +7,11 @@ namespace FunctionComplete.Services
 {
     public class FunctionCompleteService
     {
+        /// <summary>
+        /// Current function typing name based on token
+        /// </summary>
+        /// <param name="token">token</param>
+        /// <returns>function name</returns>
         public string GetCurrentFunctionName(string token)
         {
             var lastIndexOfComma = token.LastIndexOf(",");
@@ -18,6 +23,12 @@ namespace FunctionComplete.Services
             return currentFunctionName;
         }
 
+        /// <summary>
+        /// All suggestions
+        /// </summary>
+        /// <param name="functionToken">Token</param>
+        /// <param name="functions">All functions</param>
+        /// <returns></returns>
         public List<String> GetFunctionComplete(string functionToken, List<FunctionSignature> functions)
         {
             return functions.Where(t => t.Name.StartsWith(functionToken))
