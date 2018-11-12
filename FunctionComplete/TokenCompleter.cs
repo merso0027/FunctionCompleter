@@ -22,6 +22,11 @@ namespace FunctionComplete
             functions = functionService.GetAllFunctions();
         }
 
+        /// <summary>
+        /// Analize token to get suggestions
+        /// </summary>
+        /// <param name="token">token</param>
+        /// <returns>Suggestion object</returns>
         public Suggestions Run(string token)
         {
             string cleanToken = Regex.Replace(token, @"\s+", "");
