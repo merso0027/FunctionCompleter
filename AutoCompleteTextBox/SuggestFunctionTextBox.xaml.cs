@@ -5,32 +5,35 @@ using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using FunctionComplete;
 using FunctionComplete.Models;
+using System.Linq;
 
 namespace Controls
 {
     public partial class SuggestFunctionTextBox : TextBox
     {
-        Popup Popup { get { return this.Template.FindName("PART_Popup", this) as Popup; } }
-        ListBox ItemList { get { return this.Template.FindName("PART_ItemList", this) as ListBox; } }
-        Grid Root { get { return this.Template.FindName("root", this) as Grid; } }
-        ScrollViewer Host { get { return this.Template.FindName("PART_ContentHost", this) as ScrollViewer; } }
-        UIElement TextBoxView { get { foreach (object o in LogicalTreeHelper.GetChildren(Host)) return o as UIElement; return null; } }
+        private Popup Popup { get { return this.Template.FindName("PART_Popup", this) as Popup; } }
+        private ListBox ItemList { get { return this.Template.FindName("PART_ItemList", this) as ListBox; } }
+        private Grid Root { get { return this.Template.FindName("root", this) as Grid; } }
+        private ScrollViewer Host { get { return this.Template.FindName("PART_ContentHost", this) as ScrollViewer; } }
+        private UIElement TextBoxView { get { foreach (object o in LogicalTreeHelper.GetChildren(Host)) return o as UIElement; return null; } }
 
         private TokenCompleter _tokenCompleter;
         private Suggestions _suggestions;
-        private ToolTip s = new ToolTip();
+        private ToolTip tooltipMethodDescriptions;
         public SuggestFunctionTextBox()
         {
             _tokenCompleter = new TokenCompleter();
             InitializeComponent();
-            s = new ToolTip();
-            s.PlacementTarget = this;
-            s.Placement = PlacementMode.Top;
-            s.Content = "Tamo daleko daleko kraj mora tamo je selo moje" + Environment.NewLine + "tamo je srbije. Tamo daleko gde cveta limun zut";
-            this.ToolTip = s;
+            InitializeTooltip();
         }
 
-        private bool prevState = false;
+        private void InitializeTooltip()
+        {
+            tooltipMethodDescriptions = new ToolTip();
+            tooltipMethodDescriptions.PlacementTarget = this;
+            tooltipMethodDescriptions.Placement = PlacementMode.Top;
+            this.ToolTip = tooltipMethodDescriptions;
+        }
 
         public override void OnApplyTemplate()
         {
@@ -138,14 +141,23 @@ namespace Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             _suggestions = _tokenCompleter.Run(this.Text);
-            s.IsOpen = true;
+            tooltipMethodDescriptions.IsOpen = _suggestions.Signatures.Count > 0;
+            string signatures = string.Empty;
+            foreach (var item in _suggestions.Signatures)
+            {
+                if (_suggestions.Signatures.LastOrDefault().Equals(item))
+                {
+                    signatures += item;
+                    break;
+                }
+                signatures += item + Environment.NewLine;
+            }
+
+            tooltipMethodDescriptions.Content = signatures;
             ItemList.Items.Clear();
             foreach (string value in _suggestions.Complete)
             {
-                if (!(String.Equals(value, this.Text, StringComparison.CurrentCultureIgnoreCase)))
-                {
-                    ItemList.Items.Add(value);
-                }
+                ItemList.Items.Add(value);
             }
             Popup.IsOpen = ItemList.Items.Count > 0;
         }

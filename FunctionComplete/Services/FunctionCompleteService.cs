@@ -24,6 +24,7 @@ namespace FunctionComplete.Services
         {
             return functions.Where(t => t.Name.StartsWith(functionToken))
                 .Select(b => b.Name)
+                .Distinct()
                 .ToList();
         }
     }
