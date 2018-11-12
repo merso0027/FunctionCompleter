@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FunctionComplete.Models
 {
+    /// <summary>
+    /// Function signature
+    /// </summary>
     public class FunctionSignature
     {
         public FunctionSignature()
@@ -13,10 +12,19 @@ namespace FunctionComplete.Models
             Arguments = new List<Argument>();
         }
 
+        /// <summary>
+        /// Function name
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Whole function signature
+        /// </summary>
         public string Signature { get; set; }
 
+        /// <summary>
+        /// All function arguments
+        /// </summary>
         public IList<Argument> Arguments { get; set; }
     }
 }

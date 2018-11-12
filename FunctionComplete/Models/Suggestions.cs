@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FunctionComplete.Models
 {
+    /// <summary>
+    /// Suggestion based on token.
+    /// </summary>
     public class Suggestions
     {
         public Suggestions()
@@ -15,7 +14,7 @@ namespace FunctionComplete.Models
         }
 
         /// <summary>
-        /// Text before current function.
+        /// Text of token before current typing function.
         /// </summary>
         public string TokenToCurrent { get; set; }
 
