@@ -44,7 +44,11 @@ namespace FunctionComplete
             var currentFunction = functionCompleteService.CurrentFunctionName(cleanToken);
             var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
 
-            result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
+            result.TokenToCurrent = cleanToken;
+            if (!string.IsNullOrWhiteSpace(currentFunction))
+            {
+                result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
+            }
             result.Complete = functionCompleteService.GetFunctionComplete(currentFunction, functions);
             result.Signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
             return result;
