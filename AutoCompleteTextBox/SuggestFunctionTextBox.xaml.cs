@@ -22,6 +22,7 @@ namespace Controls
         private Suggestions _suggestions;
         private ToolTip tooltipMethodSignatures;
         private FunctionRepository functionRepository;
+
         public SuggestFunctionTextBox()
         {
             functionRepository = new FunctionRepository();
@@ -30,22 +31,26 @@ namespace Controls
             InitializeTooltip();
         }
 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            KeyDown += new KeyEventHandler(AutoCompleteTextBox_KeyDown);
+            PreviewKeyDown += new KeyEventHandler(AutoCompleteTextBox_PreviewKeyDown);
+            ItemList.PreviewMouseDown += new MouseButtonEventHandler(ItemList_PreviewMouseDown);
+            ItemList.KeyDown += new KeyEventHandler(ItemList_KeyDown);
+            Popup.CustomPopupPlacementCallback += new CustomPopupPlacementCallback(Repositioning);
+        }
+
+        /// <summary>
+        /// Initialize tooltip.
+        /// Tooltip will contain whole message signatures.
+        /// </summary>
         private void InitializeTooltip()
         {
             tooltipMethodSignatures = new ToolTip();
             tooltipMethodSignatures.PlacementTarget = this;
             tooltipMethodSignatures.Placement = PlacementMode.Top;
-            this.ToolTip = tooltipMethodSignatures;
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            this.KeyDown += new KeyEventHandler(AutoCompleteTextBox_KeyDown);
-            this.PreviewKeyDown += new KeyEventHandler(AutoCompleteTextBox_PreviewKeyDown);
-            ItemList.PreviewMouseDown += new MouseButtonEventHandler(ItemList_PreviewMouseDown);
-            ItemList.KeyDown += new KeyEventHandler(ItemList_KeyDown);
-            Popup.CustomPopupPlacementCallback += new CustomPopupPlacementCallback(Repositioning);
+            ToolTip = tooltipMethodSignatures;
         }
 
         private CustomPopupPlacement[] Repositioning(Size popupSize, Size targetSize, Point offset)
@@ -115,10 +120,16 @@ namespace Controls
             if (e.Key == Key.Enter)
             {
                 Popup.IsOpen = false;
+                tooltipMethodSignatures.IsOpen = false;
                 updateSource();
             }
+            if (e.Key == Key.Escape)
+            {
+                Popup.IsOpen = false;
+                tooltipMethodSignatures.IsOpen = false;
+            }
         }
-
+        
         void updateSource()
         {
             if (this.GetBindingExpression(TextBox.TextProperty) != null)
@@ -129,10 +140,10 @@ namespace Controls
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                TextBlock tb = e.OriginalSource as TextBlock;
-                if (tb != null)
+                TextBlock textBlock = e.OriginalSource as TextBlock;
+                if (textBlock != null)
                 {
-                    Text = _suggestions.TokenToCurrent + (tb.Text as string) + "(";
+                    Text = _suggestions.TokenToCurrent + (textBlock.Text as string) + "(";
                     updateSource();
                     SelectionStart = Text.Length;
                     SelectionLength = 0;

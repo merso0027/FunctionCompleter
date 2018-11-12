@@ -39,7 +39,5 @@
                 </Setter>
             </Style>
         </ResourceDictionary>
-        
     </TextBox.Resources>
-
 </TextBox>
