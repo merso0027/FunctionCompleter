@@ -91,6 +91,9 @@ namespace Controls
                         Text = _suggestions.TokenToCurrent + (tb.Content as string) + "(";
                         updateSource();
                         break;
+                    case Key.Escape:
+                        tooltipMethodDescriptions.IsOpen = false;
+                        break;
                     default:
                         e.Handled = false;
                         break;
