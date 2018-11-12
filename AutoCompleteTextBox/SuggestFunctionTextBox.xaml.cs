@@ -18,11 +18,16 @@ namespace Controls
 
         private TokenCompleter _tokenCompleter;
         private Suggestions _suggestions;
-
+        private ToolTip s = new ToolTip();
         public SuggestFunctionTextBox()
         {
             _tokenCompleter = new TokenCompleter();
             InitializeComponent();
+            s = new ToolTip();
+            s.PlacementTarget = this;
+            s.Placement = PlacementMode.Top;
+            s.Content = "Tamo daleko daleko kraj mora tamo je selo moje" + Environment.NewLine + "tamo je srbije. Tamo daleko gde cveta limun zut";
+            this.ToolTip = s;
         }
 
         private bool prevState = false;
@@ -35,22 +40,6 @@ namespace Controls
             ItemList.PreviewMouseDown += new MouseButtonEventHandler(ItemList_PreviewMouseDown);
             ItemList.KeyDown += new KeyEventHandler(ItemList_KeyDown);
             Popup.CustomPopupPlacementCallback += new CustomPopupPlacementCallback(Repositioning);
-
-            Window parentWindow = getParentWindow();
-           
-            if (parentWindow != null)
-            {
-                parentWindow.Deactivated += delegate { prevState = Popup.IsOpen; Popup.IsOpen = false; };
-                parentWindow.Activated += delegate { Popup.IsOpen = prevState; };
-            }
-        }
-
-        private Window getParentWindow()
-        {
-            DependencyObject d = this;
-            while (d != null && !(d is Window))
-                d = LogicalTreeHelper.GetParent(d);
-            return d as Window;
         }
 
         private CustomPopupPlacement[] Repositioning(Size popupSize, Size targetSize, Point offset)
@@ -149,7 +138,7 @@ namespace Controls
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             _suggestions = _tokenCompleter.Run(this.Text);
-
+            s.IsOpen = true;
             ItemList.Items.Clear();
             foreach (string value in _suggestions.Complete)
             {
