@@ -14,5 +14,8 @@
         /// Argument type
         /// </summary>
         public string Type { get; set; }
+
+        public string stenica { get; set; }
+
     }
 }
