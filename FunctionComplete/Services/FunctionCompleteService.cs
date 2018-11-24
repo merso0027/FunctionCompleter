@@ -29,9 +29,10 @@ namespace FunctionComplete.Services
         /// <param name="functionToken">Token</param>
         /// <param name="functions">All functions</param>
         /// <returns></returns>
-        public List<String> GetFunctionComplete(string functionToken, List<FunctionSignature> functions)
+        public List<String> GetFunctionComplete(string functionToken, List<FunctionSignature> functions, List<string> allowedTypes)
         {
             return functions.Where(t => t.FunctionName.ToUpper().StartsWith(functionToken.ToUpper()))
+                .Where(t=>allowedTypes.Contains(t.ReturnType))
                 .Select(b => b.FunctionName)
                 .Distinct()
                 .ToList();

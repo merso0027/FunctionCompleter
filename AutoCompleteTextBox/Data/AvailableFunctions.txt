@@ -7,3 +7,7 @@ times(int x, int y, int z) :int
 max (int x, int y):int
 min (int x, int y):int
 random() :double
+prva():prvitip
+druga():drugitip
+treca():trecitip
+test(prvitip a, drugitip b, trecitip t):int

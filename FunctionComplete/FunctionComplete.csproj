@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\SubstringExtensions.cs" />
     <Compile Include="Models\Suggestions.cs" />
+    <Compile Include="Services\ParameterTypeService.cs" />
     <Compile Include="TokenCompleter.cs" />
     <Compile Include="Models\Argument.cs" />
     <Compile Include="Models\FunctionSignature.cs" />
