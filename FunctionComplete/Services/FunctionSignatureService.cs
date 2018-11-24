@@ -52,7 +52,7 @@ namespace FunctionComplete.Services
         {
             if (functionToken == string.Empty) return new List<string>();
 
-            return functions.Where(t => t.FunctionName == functionToken)
+            return functions.Where(t => t.FunctionName.ToUpper() == functionToken.ToUpper())
                .Select(b => b.SignatureText)
                .ToList();
         }

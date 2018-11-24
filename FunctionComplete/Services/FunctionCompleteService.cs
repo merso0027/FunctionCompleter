@@ -31,7 +31,7 @@ namespace FunctionComplete.Services
         /// <returns></returns>
         public List<String> GetFunctionComplete(string functionToken, List<FunctionSignature> functions)
         {
-            return functions.Where(t => t.FunctionName.StartsWith(functionToken))
+            return functions.Where(t => t.FunctionName.ToUpper().StartsWith(functionToken.ToUpper()))
                 .Select(b => b.FunctionName)
                 .Distinct()
                 .ToList();
