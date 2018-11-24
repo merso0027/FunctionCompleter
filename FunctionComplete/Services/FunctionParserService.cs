@@ -41,6 +41,8 @@ namespace FunctionComplete.Services
                 cleanItem = cleanItem.Replace(" )", ")");
                 cleanItem = cleanItem.Replace(", ", ",");
                 cleanItem = cleanItem.Replace(" ,", ",");
+                cleanItem = cleanItem.Replace(": ", ":");
+                cleanItem = cleanItem.Replace(" :", ":");
                 res.Add(cleanItem);
             }
             return res;
@@ -68,6 +70,7 @@ namespace FunctionComplete.Services
         /// <returns>Function signature object.</returns>
         private FunctionSignature ParseFunctionSignature(string signature)
         {
+            string returnType = signature.Split(':')[1];
             string functionName = (signature.Split('(')[0]).Trim();
             int functionStartIndex = signature.IndexOf("(");
             int functionEndIndex = signature.IndexOf(")");
@@ -93,6 +96,7 @@ namespace FunctionComplete.Services
             {
                 SignatureText = signature,
                 FunctionName = functionName,
+                ReturnType = returnType,
                 Arguments = arguments
             };
         }

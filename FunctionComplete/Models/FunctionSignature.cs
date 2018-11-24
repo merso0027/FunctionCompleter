@@ -23,6 +23,10 @@ namespace FunctionComplete.Models
         public string FunctionName { get; set; }
 
         /// <summary>
+        /// Return type
+        /// </summary>
+        public string ReturnType { get; set; }
+        /// <summary>
         /// All function arguments
         /// </summary>
         public IList<Argument> Arguments { get; set; }

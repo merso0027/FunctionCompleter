@@ -1,9 +1,9 @@
-﻿plus( int a,   int   b)
-plus   (int a, int b)
-plus (string first, string second)
-minus(int a, int b)
-times(int x, int y)
-times(int x, int y, int z)
-max (int x, int y)
-min (int x, int y)
-random()
+﻿plus( int a,   int   b)   :   int
+plus   (int a, int b, int c) : int
+plus (string first, string second)    :   string
+minus(int a, int b)  :  int
+times(int x, int y) : int
+times(int x, int y, int z) :int
+max (int x, int y):int
+min (int x, int y):int
+random() :double
