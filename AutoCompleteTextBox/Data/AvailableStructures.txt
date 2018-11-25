@@ -1,2 +1,2 @@
-﻿Task{a:int,b:string}
-Customer{name:string,fullName:string,age:int}
+﻿Task{int a,string b}
+Customer{string name, string fullName,int age}

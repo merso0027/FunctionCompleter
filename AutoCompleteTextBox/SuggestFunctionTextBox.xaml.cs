@@ -174,7 +174,7 @@ namespace Controls
 
             tooltipMethodSignatures.Content = signatures;
             ItemList.Items.Clear();
-            foreach (string value in _suggestions.Complete)
+            foreach (string value in _suggestions.CompleteFunctions)
             {
                 ItemList.Items.Add(value + "*");
             }

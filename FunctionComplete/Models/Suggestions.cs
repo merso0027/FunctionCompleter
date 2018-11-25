@@ -9,7 +9,7 @@ namespace FunctionComplete.Models
     {
         public Suggestions()
         {
-            Complete = new List<string>();
+            CompleteFunctions = new List<string>();
             Signatures = new List<string>();
         }
 
@@ -21,7 +21,11 @@ namespace FunctionComplete.Models
         /// <summary>
         /// Suggestions for user how to complete function.
         /// </summary>
-        public List<string> Complete { get; set; }
+        public List<string> CompleteFunctions { get; set; }
+
+        public List<string> CompleteStructures { get; set; }
+
+        public List<string> CompleteVariables { get; set; }
 
         /// <summary>
         /// Signatures of functions. 

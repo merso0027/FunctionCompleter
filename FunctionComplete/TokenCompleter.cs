@@ -11,17 +11,21 @@ namespace FunctionComplete
         private readonly FunctionCompleteService functionCompleteService;
         private readonly FunctionSignatureService functionSignatureService;
         private readonly TokenValidationService tokenValidationService;
-        private readonly List<FunctionSignature> functions;
         private readonly ParameterTypeService parameterTypeService;
+
+        private readonly List<FunctionSignature> functions;
+        private readonly List<Variable> variables;
+        private readonly List<Structure> structures;
 
         public TokenCompleter(List<string> rawFunctions, List<string> rawStrucutres, List<string> rawVariables)
         {
             functionCompleteService = new FunctionCompleteService();
             functionSignatureService = new FunctionSignatureService();
             tokenValidationService = new TokenValidationService();
-            var functionService = new FunctionParserService(rawFunctions);
-            functions = functionService.GetAllFunctions();
             parameterTypeService = new ParameterTypeService();
+            functions = new FunctionParserService(rawFunctions).GetAllFunctions();
+            variables = new VarableParserService(rawVariables).GetAllVariables();
+            structures = new StructurePareserService(rawStrucutres).GetAllStructures();
         }
 
         /// <summary>
@@ -51,7 +55,7 @@ namespace FunctionComplete
             {
                 result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
             }
-            result.Complete = functionCompleteService.GetFunctionComplete(currentFunction, functions, allowedTypes);
+            result.CompleteFunctions = functionCompleteService.GetFunctionComplete(currentFunction, functions, allowedTypes);
             result.Signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
             return result;
         }
