@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace FunctionComplete.Services
-{/// <summary>
-/// ///////////////////////////////////remove !!!!!!!
-/// </summary>
+{
     public class StructureCompleteService
     {
         /// <summary>
@@ -40,7 +38,7 @@ namespace FunctionComplete.Services
             {
                 return new List<string>();
             }
-            var properties = structType.Properties.Where(t => t.Name.StartsWith(tokenSplit.Last())).Select(g=>g.Name);
+            var properties = structType.Properties.Where(t => t.Name.StartsWith(tokenSplit.Last())).Select(g => g.Name);
             return properties.ToList();
         }
     }

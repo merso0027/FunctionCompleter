@@ -98,7 +98,7 @@ namespace Controls
                 switch (e.Key)
                 {
                     case Key.Enter:
-                        Text = _suggestions.TokenToCurrent + (tb.Content as string).Substring(0, (tb.Content as string).Length - 1);
+                        Text = _suggestions.TokenToCurrent + (tb.Content as string).Substring(2, (tb.Content as string).Length - 2);
                         updateSource();
                         break;
                     case Key.Escape:
@@ -147,7 +147,7 @@ namespace Controls
                 TextBlock textBlock = e.OriginalSource as TextBlock;
                 if (textBlock != null)
                 {
-                    Text = _suggestions.TokenToCurrent + (textBlock.Text as string).Substring(0, textBlock.Text.Length - 1);
+                    Text = _suggestions.TokenToCurrent + (textBlock.Text as string).Substring(2, textBlock.Text.Length - 2);
                     updateSource();
                     SelectionStart = Text.Length;
                     SelectionLength = 0;
@@ -176,17 +176,17 @@ namespace Controls
             ItemList.Items.Clear();
             foreach (string value in _suggestions.CompleteStructures)
             {
-                ItemList.Items.Add(value + "^");
+                ItemList.Items.Add("ω:" + value);
             }
 
             foreach (string value in _suggestions.CompleteVariables)
             {
-                ItemList.Items.Add(value + "#");
+                ItemList.Items.Add("ω:" + value );
             }
 
             foreach (string value in _suggestions.CompleteFunctions)
             {
-                ItemList.Items.Add(value + "(*");
+                ItemList.Items.Add("ƒ:" + value + "(");
             }
             Popup.IsOpen = ItemList.Items.Count > 0;
         }
