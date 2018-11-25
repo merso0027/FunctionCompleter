@@ -1,0 +1,2 @@
+﻿Task{a:int,b:string}
+Customer{name:string,fullName:string,age:int}

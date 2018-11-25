@@ -14,7 +14,7 @@ namespace FunctionComplete
         private readonly List<FunctionSignature> functions;
         private readonly ParameterTypeService parameterTypeService;
 
-        public TokenCompleter(List<string> rawFunctions)
+        public TokenCompleter(List<string> rawFunctions, List<string> rawStrucutres, List<string> rawVariables)
         {
             functionCompleteService = new FunctionCompleteService();
             functionSignatureService = new FunctionSignatureService();

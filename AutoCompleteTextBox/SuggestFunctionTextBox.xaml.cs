@@ -26,7 +26,11 @@ namespace Controls
         public SuggestFunctionTextBox()
         {
             functionRepository = new FunctionRepository();
-            _tokenCompleter = new TokenCompleter(functionRepository.GetRawFunctions());
+            _tokenCompleter = new TokenCompleter(
+                   functionRepository.GetRawFunctions(),
+                   functionRepository.GetRawStructures(),
+                   functionRepository.GetRawVariables()
+                );
             InitializeComponent();
             InitializeTooltip();
         }
@@ -94,7 +98,7 @@ namespace Controls
                 switch (e.Key)
                 {
                     case Key.Enter:
-                        Text = _suggestions.TokenToCurrent + (tb.Content as string) + "(";
+                        Text = _suggestions.TokenToCurrent + (tb.Content as string).Substring(0, (tb.Content as string).Length - 1) + "(";
                         updateSource();
                         break;
                     case Key.Escape:
@@ -129,7 +133,7 @@ namespace Controls
                 tooltipMethodSignatures.IsOpen = false;
             }
         }
-        
+
         void updateSource()
         {
             if (this.GetBindingExpression(TextBox.TextProperty) != null)
@@ -143,7 +147,7 @@ namespace Controls
                 TextBlock textBlock = e.OriginalSource as TextBlock;
                 if (textBlock != null)
                 {
-                    Text = _suggestions.TokenToCurrent + (textBlock.Text as string) + "(";
+                    Text = _suggestions.TokenToCurrent + (textBlock.Text as string).Substring(0, textBlock.Text.Length - 1) + "(";
                     updateSource();
                     SelectionStart = Text.Length;
                     SelectionLength = 0;
@@ -172,7 +176,7 @@ namespace Controls
             ItemList.Items.Clear();
             foreach (string value in _suggestions.Complete)
             {
-                ItemList.Items.Add(value);
+                ItemList.Items.Add(value + "*");
             }
             Popup.IsOpen = ItemList.Items.Count > 0;
         }
