@@ -27,19 +27,18 @@ namespace FunctionComplete.Services
             }
             Structure structType = structures.FirstOrDefault(r => r.Name == rootVariable.Type);
 
-            if (structType == null)
-            {
-                return new List<string>();
-            }
-
             for (int i = 1; i < tokenSplit.Count() - 1; i++)
             {
-                var structProperty = structType.Properties.FirstOrDefault(t => t.Name == tokenSplit[i]);
                 if (structType == null)
                 {
                     return new List<string>();
                 }
+                var structProperty = structType.Properties.FirstOrDefault(t => t.Name == tokenSplit[i]);
                 structType = structures.FirstOrDefault(r => r.Name == structProperty.Type);
+            }
+            if (structType == null)
+            {
+                return new List<string>();
             }
             var properties = structType.Properties.Where(t => t.Name.StartsWith(tokenSplit.Last())).Select(g=>g.Name);
             return properties.ToList();

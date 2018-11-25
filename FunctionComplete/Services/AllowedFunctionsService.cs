@@ -7,10 +7,10 @@ using System.Text.RegularExpressions;
 
 namespace FunctionComplete.Services
 {
-    public class ParameterTypeService
+    public class AllowedFunctionsService
     {
         public List<String> GetAllowedFunctionTypes(string token, string lastWholeFunctionName,
-             List<FunctionSignature> functions, List<Variable> variables)
+             List<FunctionSignature> functions, List<Variable> variables,List<Structure> structures)
         {
             if (string.IsNullOrWhiteSpace(lastWholeFunctionName))
             {
@@ -31,7 +31,8 @@ namespace FunctionComplete.Services
                                               .Select(t => t.Arguments[parameterOrder].Type)
                                               .Distinct()
                                               .ToList();
-            return allowedTypes;
+            var structureNames = structures.Select(g => g.Name);
+            return allowedTypes.Concat(structureNames).ToList();
         }
 
         private int GetParameterOrder(string token, string lastWholeFunctionName)

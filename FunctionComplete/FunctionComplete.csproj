@@ -44,18 +44,17 @@
     <Compile Include="Models\Structure.cs" />
     <Compile Include="Models\Variable.cs" />
     <Compile Include="Models\Suggestions.cs" />
-    <Compile Include="Services\StructureCompleteService.cs" />
-    <Compile Include="Services\VariableCompleteService.cs" />
-    <Compile Include="Services\ParameterTypeService.cs" />
-    <Compile Include="Services\StructurePareserService.cs" />
-    <Compile Include="Services\VarableParserService.cs" />
+    <Compile Include="Services\Complete\StructureCompleteService.cs" />
+    <Compile Include="Services\Complete\VariableCompleteService.cs" />
+    <Compile Include="Services\AllowedFunctionsService.cs" />
+    <Compile Include="Services\Parser\StructureParserService.cs" />
+    <Compile Include="Services\Parser\VarableParserService.cs" />
     <Compile Include="TokenCompleter.cs" />
     <Compile Include="Models\Argument.cs" />
     <Compile Include="Models\FunctionSignature.cs" />
-    <Compile Include="Services\FunctionCompleteService.cs" />
-    <Compile Include="Services\FunctionParserService.cs" />
+    <Compile Include="Services\Complete\FunctionCompleteService.cs" />
+    <Compile Include="Services\Parser\FunctionParserService.cs" />
     <Compile Include="Services\FunctionSignatureService.cs" />
-    <Compile Include="Services\TokenValidationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

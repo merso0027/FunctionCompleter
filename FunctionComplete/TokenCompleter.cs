@@ -12,8 +12,7 @@ namespace FunctionComplete
         private readonly VariableCompleteService variableCompleteService;
         private readonly StructureCompleteService structureCompleteService;
         private readonly FunctionSignatureService functionSignatureService;
-        private readonly TokenValidationService tokenValidationService;
-        private readonly ParameterTypeService parameterTypeService;
+        private readonly AllowedFunctionsService parameterTypeService;
 
         private readonly List<FunctionSignature> functions;
         private readonly List<Variable> variables;
@@ -25,11 +24,10 @@ namespace FunctionComplete
             variableCompleteService = new VariableCompleteService();
             structureCompleteService = new StructureCompleteService();
             functionSignatureService = new FunctionSignatureService();
-            tokenValidationService = new TokenValidationService();
-            parameterTypeService = new ParameterTypeService();
+            parameterTypeService = new AllowedFunctionsService();
             functions = new FunctionParserService(rawFunctions).GetAllFunctions();
             variables = new VarableParserService(rawVariables).GetAllVariables();
-            structures = new StructurePareserService(rawStrucutres).GetAllStructures();
+            structures = new StructureParserService(rawStrucutres).GetAllStructures();
         }
 
         /// <summary>
@@ -46,11 +44,6 @@ namespace FunctionComplete
                 return result;
             }
 
-            if (!tokenValidationService.IsTokenValid(cleanToken))
-            {
-                throw new NotImplementedException();
-            }
-
             var currentTypingToken = functionCompleteService.CurrentFunctionName(cleanToken);
             result.TokenToCurrent = cleanToken;
             if (currentTypingToken.Contains("."))
@@ -61,7 +54,7 @@ namespace FunctionComplete
             else
             {
                 var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
-                var allowedFunctionTypes = parameterTypeService.GetAllowedFunctionTypes(cleanToken, currentWholeFunction, functions, variables);
+                var allowedFunctionTypes = parameterTypeService.GetAllowedFunctionTypes(cleanToken, currentWholeFunction, functions, variables, structures);
                 if (!string.IsNullOrWhiteSpace(currentTypingToken))
                 {
                     result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentTypingToken));

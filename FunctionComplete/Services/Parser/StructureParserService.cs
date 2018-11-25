@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace FunctionComplete.Services
 {
-    public class StructurePareserService
+    public class StructureParserService
     {
         private List<string> rawStructures;
-        public StructurePareserService(List<string> rawStructures)
+        public StructureParserService(List<string> rawStructures)
         {
             this.rawStructures = rawStructures;
         }
