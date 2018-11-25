@@ -7,7 +7,8 @@ times(int x, int y, int z) :int
 max (int x, int y):int
 min (int x, int y):Task
 random() :double
-prva():prvitip
-druga():drugitip
-treca():trecitip
-test(prvitip a, drugitip b, trecitip t):int
+getEurope():Europe
+getAmerica():America
+getAsia():Asia
+getAfrica():Africa
+getContinent():Continent

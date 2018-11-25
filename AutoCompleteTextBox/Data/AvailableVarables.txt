@@ -2,3 +2,7 @@
 y:int
 myTask:Task
 myContinet:Continent
+myEurope:Europe
+myAfrica:Africa
+myAsia:Asia
+myAmerica:America

@@ -32,6 +32,10 @@ namespace FunctionComplete.Services
                     return new List<string>();
                 }
                 var structProperty = structType.Properties.FirstOrDefault(t => t.Name == tokenSplit[i]);
+                if (structProperty == null)
+                {
+                    return new List<string>();
+                }
                 structType = structures.FirstOrDefault(r => r.Name == structProperty.Type);
             }
             if (structType == null)
