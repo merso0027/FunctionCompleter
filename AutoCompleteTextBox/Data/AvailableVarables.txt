@@ -1,3 +1,4 @@
 ﻿x:int
 y:int
 myTask:Task
+myContinet:Continent

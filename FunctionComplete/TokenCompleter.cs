@@ -9,6 +9,8 @@ namespace FunctionComplete
     public class TokenCompleter
     {
         private readonly FunctionCompleteService functionCompleteService;
+        private readonly VariableCompleteService variableCompleteService;
+        private readonly StructureCompleteService structureCompleteService;
         private readonly FunctionSignatureService functionSignatureService;
         private readonly TokenValidationService tokenValidationService;
         private readonly ParameterTypeService parameterTypeService;
@@ -20,6 +22,8 @@ namespace FunctionComplete
         public TokenCompleter(List<string> rawFunctions, List<string> rawStrucutres, List<string> rawVariables)
         {
             functionCompleteService = new FunctionCompleteService();
+            variableCompleteService = new VariableCompleteService();
+            structureCompleteService = new StructureCompleteService();
             functionSignatureService = new FunctionSignatureService();
             tokenValidationService = new TokenValidationService();
             parameterTypeService = new ParameterTypeService();
@@ -47,17 +51,26 @@ namespace FunctionComplete
                 throw new NotImplementedException();
             }
 
-            var currentFunction = functionCompleteService.CurrentFunctionName(cleanToken);
-            var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
-            var allowedTypes = parameterTypeService.GetAllowedTypes(cleanToken, currentWholeFunction, functions);
+            var currentTypingToken = functionCompleteService.CurrentFunctionName(cleanToken);
             result.TokenToCurrent = cleanToken;
-            if (!string.IsNullOrWhiteSpace(currentFunction))
+            if (currentTypingToken.Contains("."))
             {
-                result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentFunction));
+                result.CompleteStructures = structureCompleteService.GetStructureComplete(currentTypingToken, structures, variables);
+                return result;
             }
-            result.CompleteFunctions = functionCompleteService.GetFunctionComplete(currentFunction, functions, allowedTypes);
-            result.Signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
-            return result;
+            else
+            {
+                var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
+                var allowedFunctionTypes = parameterTypeService.GetAllowedFunctionTypes(cleanToken, currentWholeFunction, functions, variables);
+                if (!string.IsNullOrWhiteSpace(currentTypingToken))
+                {
+                    result.TokenToCurrent = cleanToken.Substring(0, cleanToken.LastIndexOf(currentTypingToken));
+                }
+                result.CompleteFunctions = functionCompleteService.GetFunctionComplete(currentTypingToken, functions, allowedFunctionTypes);
+                result.Signatures = functionSignatureService.GetFunctionSignatures(currentWholeFunction, functions);
+                result.CompleteVariables = variableCompleteService.GetVariableComplete(currentTypingToken, variables, allowedFunctionTypes);
+                return result;
+            }
         }
     }
 }

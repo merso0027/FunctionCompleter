@@ -11,6 +11,8 @@ namespace FunctionComplete.Models
         {
             CompleteFunctions = new List<string>();
             Signatures = new List<string>();
+            CompleteStructures = new List<string>();
+            CompleteVariables = new List<string>();
         }
 
         /// <summary>

@@ -9,13 +9,20 @@ namespace FunctionComplete.Services
 {
     public class ParameterTypeService
     {
-        public List<String> GetAllowedTypes(string token, string lastWholeFunctionName, List<FunctionSignature> functions)
+        public List<String> GetAllowedFunctionTypes(string token, string lastWholeFunctionName,
+             List<FunctionSignature> functions, List<Variable> variables)
         {
             if (string.IsNullOrWhiteSpace(lastWholeFunctionName))
             {
-                return functions.Select(t => t.ReturnType)
+                var func = functions.Select(t => t.ReturnType)
                                 .Distinct()
                                 .ToList();
+
+                var vars = variables.Select(t => t.Type)
+                .Distinct()
+                .ToList();
+
+                return vars.Concat(func).Distinct().ToList();
             }
 
             var parameterOrder = GetParameterOrder(token, lastWholeFunctionName);
