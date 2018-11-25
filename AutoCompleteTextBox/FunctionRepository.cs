@@ -6,7 +6,7 @@ namespace Repository
     public class FunctionRepository
     {
         /// <summary>
-        /// Read all functions signatures from file.
+        /// Read all functions signatures from file
         /// </summary>
         /// <returns></returns>
         public List<string> GetRawFunctions()
