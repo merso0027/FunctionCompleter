@@ -12,12 +12,20 @@ namespace FunctionComplete.Services
         /// </summary>
         /// <param name="token">token</param>
         /// <returns>function name</returns>
-        public string CurrentFunctionName(string token)
+        public string CurrentFunctionName(string token, char[] operators)
         {
             var lastIndexOfComma = token.LastIndexOf(",");
             var lastIndexOfEquals = token.LastIndexOf("=");
             var lastIndexOfOpenParenthesis = token.LastIndexOf("(");
-            int lastOfAll = Math.Max(lastIndexOfComma, Math.Max(lastIndexOfEquals, lastIndexOfOpenParenthesis));
+            int lastOfBasicOperators = Math.Max(lastIndexOfComma, Math.Max(lastIndexOfEquals, lastIndexOfOpenParenthesis));
+
+            int lastIndexOperatorMax = 0;
+            foreach (var item in operators)
+            {
+                var lastIndex = token.LastIndexOf(item);
+                if (lastIndex > lastIndexOperatorMax) lastIndexOperatorMax = lastIndex;
+            }
+            int lastOfAll = Math.Max(lastOfBasicOperators, lastIndexOperatorMax);
             if (lastOfAll < 1) return token;
             string currentFunctionName = token.Substring(lastOfAll + 1, token.Length - lastOfAll - 1);
             return currentFunctionName;

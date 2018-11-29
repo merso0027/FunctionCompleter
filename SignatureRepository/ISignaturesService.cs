@@ -10,6 +10,6 @@ namespace SignatureRepository
 
         List<string> GetRawVariables();
 
-        List<string> GetOperators();
+        char[] GetOperators();
     }
 }

@@ -5,9 +5,15 @@ namespace SignatureRepository
 {
     internal class FileSignatureService : ISignaturesService
     {
-        public List<string> GetOperators()
+        public char[] GetOperators()
         {
-            throw new System.NotImplementedException();
+            char[] operators = new char[5];
+            operators[0] = '+';
+            operators[1] = '-';
+            operators[2] = '*';
+            operators[3] = '/';
+            operators[4] = '^';
+            return operators;
         }
 
         /// <summary>

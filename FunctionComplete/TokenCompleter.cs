@@ -18,6 +18,7 @@ namespace FunctionComplete
         private readonly List<FunctionSignature> functions;
         private readonly List<Variable> variables;
         private readonly List<Structure> structures;
+        private readonly char[] operators;
 
         public TokenCompleter(ISignaturesService signaturesService)
         {
@@ -29,6 +30,7 @@ namespace FunctionComplete
             functions = new FunctionParserService(signaturesService.GetRawFunctions()).GetAllFunctions();
             variables = new VarableParserService(signaturesService.GetRawVariables()).GetAllVariables();
             structures = new StructureParserService(signaturesService.GetRawStructures()).GetAllStructures();
+            operators = signaturesService.GetOperators();
         }
 
         /// <summary>
@@ -45,7 +47,7 @@ namespace FunctionComplete
                 return result;
             }
 
-            var currentTypingToken = functionCompleteService.CurrentFunctionName(cleanToken);
+            var currentTypingToken = functionCompleteService.CurrentFunctionName(cleanToken, operators);
             result.TokenToCurrent = cleanToken;
             if (currentTypingToken.Contains("."))
             {
@@ -54,14 +56,14 @@ namespace FunctionComplete
                 {
                     var previosTypingFunction = cleanToken.LastIndexOf(").");
                     var completeFunction = cleanToken.Remove(previosTypingFunction);
-                    function = functionSignatureService.GetWholeCurrentFunctionName(completeFunction);
+                    function = functionSignatureService.GetWholeCurrentFunctionName(completeFunction, operators);
                 }
                 result.CompleteStructures = structureCompleteService.GetStructureComplete(currentTypingToken, function, structures, variables, functions);
                 return result;
             }
             else
             {
-                var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken);
+                var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken, operators);
                 var allowedFunctionTypes = parameterTypeService.GetAllowedFunctionTypes(cleanToken, currentWholeFunction, functions, variables, structures);
                 if (!string.IsNullOrWhiteSpace(currentTypingToken))
                 {

@@ -19,7 +19,7 @@ namespace FunctionComplete.Services
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        public string GetWholeCurrentFunctionName(string token)
+        public string GetWholeCurrentFunctionName(string token, char[] operators)
         {
             char[] array = token.ToCharArray();
 
@@ -38,7 +38,7 @@ namespace FunctionComplete.Services
                 }
             }
             string tokenToWholeFunction = token.Substring(0, indexWhereWholeFunctionEnds);
-            var res = functionCompleteService.CurrentFunctionName(tokenToWholeFunction);
+            var res = functionCompleteService.CurrentFunctionName(tokenToWholeFunction,operators);
             return res;
         }
 
