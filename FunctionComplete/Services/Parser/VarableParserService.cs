@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FunctionComplete.Services
 {
-    public class VarableParserService
+    internal class VarableParserService
     {
         private List<string> rawVariables;
         public VarableParserService(List<string> rawVariables)

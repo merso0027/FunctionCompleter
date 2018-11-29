@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace FunctionComplete.Services
 {
-    public class AllowedFunctionsService
+    internal class AllowedFunctionsService
     {
         public List<String> GetAllowedFunctionTypes(string token, string lastWholeFunctionName,
              List<FunctionSignature> functions, List<Variable> variables,List<Structure> structures)

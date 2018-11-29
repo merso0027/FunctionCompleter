@@ -3,7 +3,7 @@
     /// <summary>
     /// Variables
     /// </summary>
-    public class Variable
+    internal class Variable
     {
         /// <summary>
         /// Variable name

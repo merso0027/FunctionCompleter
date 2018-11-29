@@ -3,7 +3,7 @@
     /// <summary>
     /// Function argument
     /// </summary>
-    public class Argument
+    internal class Argument
     {
         /// <summary>
         /// Argument name

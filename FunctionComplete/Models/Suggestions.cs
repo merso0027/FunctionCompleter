@@ -25,8 +25,14 @@ namespace FunctionComplete.Models
         /// </summary>
         public List<string> CompleteFunctions { get; set; }
 
+        /// <summary>
+        /// Suggestion for structure varables complete
+        /// </summary>
         public List<string> CompleteStructures { get; set; }
 
+        /// <summary>
+        /// Suggestion for variables complete
+        /// </summary>
         public List<string> CompleteVariables { get; set; }
 
         /// <summary>

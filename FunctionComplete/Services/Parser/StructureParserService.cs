@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FunctionComplete.Services
 {
-    public class StructureParserService
+    internal class StructureParserService
     {
         private List<string> rawStructures;
         public StructureParserService(List<string> rawStructures)

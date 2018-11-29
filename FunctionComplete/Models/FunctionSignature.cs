@@ -5,7 +5,7 @@ namespace FunctionComplete.Models
     /// <summary>
     /// Function signature
     /// </summary>
-    public class FunctionSignature
+    internal class FunctionSignature
     {
         public FunctionSignature()
         {

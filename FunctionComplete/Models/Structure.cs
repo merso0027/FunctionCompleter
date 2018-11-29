@@ -5,7 +5,7 @@ namespace FunctionComplete.Models
     /// <summary>
     /// Variables
     /// </summary>
-    public class Structure
+    internal class Structure
     {
         public string Name { get; set; }
 

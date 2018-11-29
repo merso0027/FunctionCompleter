@@ -13,7 +13,7 @@ namespace FunctionComplete.Services
         /// <param name="token">Token</param>
         /// <param name="functions">All functions</param>
         /// <returns></returns>
-        public List<String> GetVariableComplete(string token, List<Variable> functions, List<string> allowedTypes)
+        internal List<String> GetVariableComplete(string token, List<Variable> functions, List<string> allowedTypes)
         {
             return functions.Where(t => t.Name.ToUpper().StartsWith(token.ToUpper()))
                 .Where(t=>allowedTypes.Contains(t.Type))

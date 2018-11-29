@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace FunctionComplete.Services
 {
-    public class FunctionParserService
+    internal class FunctionParserService
     {
         private List<string> rawFunctions;
         public FunctionParserService(List<string> rawFunctions)

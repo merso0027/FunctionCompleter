@@ -13,7 +13,7 @@ namespace FunctionComplete.Services
         /// <param name="token">Token</param>
         /// <param name="structures">All functions</param>
         /// <returns></returns>
-        public List<String> GetStructureComplete(string token, List<Structure> structures, List<Variable> variables)
+        internal List<String> GetStructureComplete(string token, List<Structure> structures, List<Variable> variables)
         {
             string[] tokenSplit = token.Split('.');
             string root = tokenSplit[0];

@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace FunctionComplete.Services
 {
-    public class FunctionSignatureService
+    internal class WholeFunctionSignatureService
     {
         private FunctionCompleteService functionCompleteService;
 
-        public FunctionSignatureService()
+        public WholeFunctionSignatureService()
         {
             functionCompleteService = new FunctionCompleteService();
         }

@@ -6,7 +6,7 @@ using System.Windows.Controls.Primitives;
 using FunctionComplete;
 using FunctionComplete.Models;
 using System.Linq;
-using Repository;
+using FunctionCompleteCommon;
 
 namespace Controls
 {
@@ -21,16 +21,11 @@ namespace Controls
         private TokenCompleter _tokenCompleter;
         private Suggestions _suggestions;
         private ToolTip tooltipMethodSignatures;
-        private FunctionRepository functionRepository;
 
         public SuggestFunctionTextBox()
         {
-            functionRepository = new FunctionRepository();
-            _tokenCompleter = new TokenCompleter(
-                   functionRepository.GetRawFunctions(),
-                   functionRepository.GetRawStructures(),
-                   functionRepository.GetRawVariables()
-                );
+            var signatureFactory = new SignatureFactory();
+            _tokenCompleter = new TokenCompleter(signatureFactory.GetSignatureService());
             InitializeComponent();
             InitializeTooltip();
         }

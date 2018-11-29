@@ -2,7 +2,7 @@
 
 namespace FunctionComplete.Helpers
 {
-    static class SubstringExtensions
+    internal static class SubstringExtensions
     {
         /// <summary>
         /// Get string value between [first] a and [last] b.

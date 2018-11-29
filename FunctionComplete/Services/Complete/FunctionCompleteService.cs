@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FunctionComplete.Services
 {
-    public class FunctionCompleteService
+    internal class FunctionCompleteService
     {
         /// <summary>
         /// Current function typing name based on token

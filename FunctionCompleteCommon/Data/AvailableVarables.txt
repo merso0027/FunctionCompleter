@@ -1,5 +1,5 @@
-﻿x:int
-y:int
+﻿customeAge:int
+customerName:string
 myTask:Task
 myContinet:Continent
 myEurope:Europe

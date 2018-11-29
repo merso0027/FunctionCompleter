@@ -1,5 +1,6 @@
 ﻿using FunctionComplete.Models;
 using FunctionComplete.Services;
+using FunctionCompleteCommon;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -11,23 +12,23 @@ namespace FunctionComplete
         private readonly FunctionCompleteService functionCompleteService;
         private readonly VariableCompleteService variableCompleteService;
         private readonly StructureCompleteService structureCompleteService;
-        private readonly FunctionSignatureService functionSignatureService;
+        private readonly WholeFunctionSignatureService functionSignatureService;
         private readonly AllowedFunctionsService parameterTypeService;
 
         private readonly List<FunctionSignature> functions;
         private readonly List<Variable> variables;
         private readonly List<Structure> structures;
 
-        public TokenCompleter(List<string> rawFunctions, List<string> rawStrucutres, List<string> rawVariables)
+        public TokenCompleter(ISignaturesService signaturesService)
         {
             functionCompleteService = new FunctionCompleteService();
             variableCompleteService = new VariableCompleteService();
             structureCompleteService = new StructureCompleteService();
-            functionSignatureService = new FunctionSignatureService();
+            functionSignatureService = new WholeFunctionSignatureService();
             parameterTypeService = new AllowedFunctionsService();
-            functions = new FunctionParserService(rawFunctions).GetAllFunctions();
-            variables = new VarableParserService(rawVariables).GetAllVariables();
-            structures = new StructureParserService(rawStrucutres).GetAllStructures();
+            functions = new FunctionParserService(signaturesService.GetRawFunctions()).GetAllFunctions();
+            variables = new VarableParserService(signaturesService.GetRawVariables()).GetAllVariables();
+            structures = new StructureParserService(signaturesService.GetRawStructures()).GetAllStructures();
         }
 
         /// <summary>

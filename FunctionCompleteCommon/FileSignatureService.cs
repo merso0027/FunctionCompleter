@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using FunctionCompleteCommon;
+using System.Collections.Generic;
 using System.IO;
 
-namespace Repository
+namespace FunctionCompleteCommon
 {
-    public class FunctionRepository
+    internal class FileSignatureService : ISignaturesService
     {
+        public List<string> GetOperators()
+        {
+            throw new System.NotImplementedException();
+        }
+
         /// <summary>
         /// Read all functions signatures from file
         /// </summary>

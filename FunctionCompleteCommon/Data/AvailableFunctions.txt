@@ -6,6 +6,7 @@ times(int x, int y) : int
 times(int x, int y, int z) :int
 max (int x, int y):int
 min (int x, int y):Task
+AddCusomer(string name,int age): string
 random() :double
 getEurope():Europe
 getAmerica():America
