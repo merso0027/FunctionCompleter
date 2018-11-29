@@ -43,12 +43,12 @@
     <Compile Include="Helpers\SubstringExtensions.cs" />
     <Compile Include="Models\Structure.cs" />
     <Compile Include="Models\Variable.cs" />
-    <Compile Include="Models\Suggestions.cs" />
     <Compile Include="Services\Complete\StructureCompleteService.cs" />
     <Compile Include="Services\Complete\VariableCompleteService.cs" />
     <Compile Include="Services\AllowedFunctionsService.cs" />
     <Compile Include="Services\Parser\StructureParserService.cs" />
     <Compile Include="Services\Parser\VarableParserService.cs" />
+    <Compile Include="Suggestions.cs" />
     <Compile Include="TokenCompleter.cs" />
     <Compile Include="Models\Argument.cs" />
     <Compile Include="Models\FunctionSignature.cs" />

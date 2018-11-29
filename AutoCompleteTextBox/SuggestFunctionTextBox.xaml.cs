@@ -3,10 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
-using FunctionComplete;
-using FunctionComplete.Models;
 using System.Linq;
 using FunctionCompleteCommon;
+using FunctionComplete;
 
 namespace Controls
 {

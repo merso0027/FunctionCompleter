@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FunctionComplete.Services
 {
-    public class VariableCompleteService
+    internal class VariableCompleteService
     {
         /// <summary>
         /// All suggestions

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FunctionComplete.Models
+namespace FunctionComplete
 {
     /// <summary>
     /// Suggestion based on token.
