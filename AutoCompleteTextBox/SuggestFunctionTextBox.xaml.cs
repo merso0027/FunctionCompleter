@@ -4,8 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Controls.Primitives;
 using System.Linq;
-using FunctionCompleteCommon;
 using FunctionComplete;
+using SignatureRepository;
 
 namespace Controls
 {

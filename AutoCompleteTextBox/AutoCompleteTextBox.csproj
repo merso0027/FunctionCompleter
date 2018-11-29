@@ -150,13 +150,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FunctionCompleteCommon\FunctionCompleteCommon.csproj">
-      <Project>{77566f94-3d7a-4007-9d07-edd19f7548ec}</Project>
-      <Name>FunctionCompleteCommon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FunctionComplete\FunctionComplete.csproj">
       <Project>{a4c0a43e-7533-424b-be49-6a759f44b140}</Project>
       <Name>FunctionComplete</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SignatureRepository\SignatureRepository.csproj">
+      <Project>{1760df98-88cc-4472-922a-6705ffe860bd}</Project>
+      <Name>SignatureRepository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

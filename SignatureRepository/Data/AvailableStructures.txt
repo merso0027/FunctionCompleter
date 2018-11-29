@@ -1,0 +1,7 @@
+﻿Task{int a,string b}
+Continent{Europe europe, America america, Africa africa,Asia asia}
+Europe{Country france, Country serbia}
+America{Country usa, Country canada}
+Africa{Country maroco, Country nigeria }
+Asia{Country india, Country china }
+Country{string name, string size}

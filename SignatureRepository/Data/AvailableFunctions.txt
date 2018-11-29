@@ -1,0 +1,15 @@
+﻿plus( int a,   int   b)   :   int
+plus   (int a, int b, int c) : int
+plus (string first, string second)    :   string
+minus(int a, int b)  :  int
+times(int x, int y) : int
+times(int x, int y, int z) :int
+max (int x, int y):int
+min (int x, int y):Task
+AddCusomer(string name,int age): string
+random() :double
+getEurope():Europe
+getAmerica():America
+getAsia():Asia
+getAfrica():Africa
+getContinent():Continent
