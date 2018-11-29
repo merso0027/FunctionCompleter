@@ -49,7 +49,14 @@ namespace FunctionComplete
             result.TokenToCurrent = cleanToken;
             if (currentTypingToken.Contains("."))
             {
-                result.CompleteStructures = structureCompleteService.GetStructureComplete(currentTypingToken, structures, variables);
+                string function = string.Empty;
+                if (currentTypingToken.StartsWith(")."))
+                {
+                    var previosTypingFunction = cleanToken.LastIndexOf(").");
+                    var completeFunction = cleanToken.Remove(previosTypingFunction);
+                    function = functionSignatureService.GetWholeCurrentFunctionName(completeFunction);
+                }
+                result.CompleteStructures = structureCompleteService.GetStructureComplete(currentTypingToken, function, structures, variables, functions);
                 return result;
             }
             else
