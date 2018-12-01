@@ -1,10 +1,6 @@
 ﻿using FunctionComplete.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace FunctionComplete.Services
 {
@@ -16,6 +12,10 @@ namespace FunctionComplete.Services
             this.rawStructures = rawStructures;
         }
 
+        /// <summary>
+        /// Get all stuructures
+        /// </summary>
+        /// <returns>Lista of structures</returns>
         public List<Structure> GetAllStructures()
         {
             var cleanRaw = cleanRawStructures(rawStructures);

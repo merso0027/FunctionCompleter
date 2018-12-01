@@ -29,6 +29,6 @@ namespace FunctionComplete.Models
         /// <summary>
         /// All function arguments
         /// </summary>
-        public IList<Argument> Arguments { get; set; }
+        public List<Argument> Arguments { get; set; }
     }
 }

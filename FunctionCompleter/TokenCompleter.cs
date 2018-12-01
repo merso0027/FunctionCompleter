@@ -1,7 +1,6 @@
 ﻿using FunctionComplete.Models;
 using FunctionComplete.Services;
 using SignatureRepository;
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,25 +13,34 @@ namespace FunctionComplete
         private readonly StructureCompleteService structureCompleteService;
         private readonly WholeFunctionSignatureService functionSignatureService;
         private readonly AllowedFunctionsService parameterTypeService;
+        private readonly ISignaturesService signaturesService;
 
-        private readonly List<FunctionSignature> functions;
-        private readonly List<Variable> variables;
-        private readonly List<Structure> structures;
-        private readonly char[] operators;
+        private List<FunctionSignature> functions;
+        private List<Variable> variables;
+        private List<Structure> structures;
+        private char[] operators;
 
         public TokenCompleter(ISignaturesService signaturesService)
         {
+            this.signaturesService = signaturesService;
             functionCompleteService = new FunctionCompleteService();
             variableCompleteService = new VariableCompleteService();
             structureCompleteService = new StructureCompleteService();
             functionSignatureService = new WholeFunctionSignatureService();
             parameterTypeService = new AllowedFunctionsService();
+            RefreshSignatures();
+        }
+
+        /// <summary>
+        /// Fresh raw data from services.
+        /// </summary>
+        public void RefreshSignatures()
+        {
             functions = new FunctionParserService(signaturesService.GetRawFunctions()).GetAllFunctions();
             variables = new VarableParserService(signaturesService.GetRawVariables()).GetAllVariables();
             structures = new StructureParserService(signaturesService.GetRawStructures()).GetAllStructures();
             operators = signaturesService.GetOperators();
         }
-
         /// <summary>
         /// Analize token to get suggestions
         /// </summary>
@@ -49,11 +57,18 @@ namespace FunctionComplete
 
             var currentTypingToken = functionCompleteService.CurrentFunctionName(cleanToken, operators);
             result.TokenToCurrent = cleanToken;
+            // Typing token is structure with property if conteins dot '.'
             if (currentTypingToken.Contains("."))
             {
+                var lastDot = cleanToken.LastIndexOf(".");
+                result.TokenToCurrent = cleanToken.Remove(lastDot) + ".";
                 string function = string.Empty;
-                if (currentTypingToken.StartsWith(")."))
+                // Structure root is function if typing token is ")."
+                // Structure root could also be variable.
+                if (currentTypingToken.Contains(")."))
                 {
+                    currentTypingToken = currentTypingToken.Substring(currentTypingToken.LastIndexOf(")."));
+                    // Sturcutre root is function se check what is that function return type.
                     var previosTypingFunction = cleanToken.LastIndexOf(").");
                     var completeFunction = cleanToken.Remove(previosTypingFunction);
                     function = functionSignatureService.GetWholeCurrentFunctionName(completeFunction, operators);
@@ -61,6 +76,7 @@ namespace FunctionComplete
                 result.CompleteStructures = structureCompleteService.GetStructureComplete(currentTypingToken, function, structures, variables, functions);
                 return result;
             }
+            // Typing token is function or variable
             else
             {
                 var currentWholeFunction = functionSignatureService.GetWholeCurrentFunctionName(cleanToken, operators);

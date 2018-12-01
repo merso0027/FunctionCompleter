@@ -65,8 +65,9 @@ namespace FunctionComplete
                 string function = string.Empty;
                 // Structure root is function if typing token is ")."
                 // Structure root could also be variable.
-                if (currentTypingToken.StartsWith(")."))
+                if (currentTypingToken.Contains(")."))
                 {
+                    currentTypingToken = currentTypingToken.Substring(currentTypingToken.LastIndexOf(")."));
                     // Sturcutre root is function se check what is that function return type.
                     var previosTypingFunction = cleanToken.LastIndexOf(").");
                     var completeFunction = cleanToken.Remove(previosTypingFunction);
