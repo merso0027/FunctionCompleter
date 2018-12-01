@@ -1,8 +1,0 @@
-﻿customeAge:int
-customerName:string
-myTask:Task
-myContinet:Continent
-myEurope:Europe
-myAfrica:Africa
-myAsia:Asia
-myAmerica:America

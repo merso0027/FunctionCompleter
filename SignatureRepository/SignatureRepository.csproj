@@ -45,16 +45,5 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignatureFactory.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\AvailableFunctions.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\AvailableStructures.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\AvailableVarables.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

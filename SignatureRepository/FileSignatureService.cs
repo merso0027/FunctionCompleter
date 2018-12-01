@@ -22,31 +22,51 @@ namespace SignatureRepository
         /// <returns></returns>
         public List<string> GetRawFunctions()
         {
-            var path = Directory.GetCurrentDirectory() + "\\Data\\AvailableFunctions.txt";
-            return ReadFromFile(path);
+
+            return new List<string>() {
+                       "plus( int a,   int   b)   :   int",
+                       "plus   (int a, int b, int c) : int",
+                       "plus (string first, string second)    :   string",
+                       "minus(int a, int b)  :  int",
+                       "times(int x, int y) : int",
+                       "times(int x, int y, int z) :int",
+                       "max (int x, int y):int",
+                       "min (int x, int y):Task",
+                       "AddCusomer(string name,int age): string",
+                       "random() :double",
+                       "getEurope():Europe",
+                       "getAmerica():America",
+                       "getAsia():Asia",
+                       "getAfrica():Africa",
+                       "getContinent():Continent"
+                       };
         }
 
         public List<string> GetRawStructures()
         {
-            var path = Directory.GetCurrentDirectory() + "\\Data\\AvailableStructures.txt";
-            return ReadFromFile(path);
+            return new List<string>() {
+                      "Task{int a,string b}",
+                      " Continent{Europe europe, America america, Africa africa,Asia asia}",
+                      " Europe{Country france, Country serbia}",
+                      " America{Country usa, Country canada}",
+                      " Africa{Country maroco, Country nigeria }",
+                      " Asia{Country india, Country china }",
+                      " Country{string name, string size}"
+            };
         }
 
         public List<string> GetRawVariables()
         {
-            var path = Directory.GetCurrentDirectory() + "\\Data\\AvailableVarables.txt";
-            return ReadFromFile(path);
-        }
-
-        private List<string> ReadFromFile(string path)
-        {
-            var lines = File.ReadLines(path);
-            var res = new List<string>();
-            foreach (var line in lines)
-            {
-                res.Add(line);
-            }
-            return res;
+            return new List<string>() {
+                      "customeAge:int",
+                      "customerName:string",
+                      "myTask:Task",
+                      "myContinet:Continent",
+                      "myEurope:Europe",
+                      "myAfrica:Africa",
+                      "myAsia:Asia",
+                      "myAmerica:America"
+            };
         }
     }
 }
