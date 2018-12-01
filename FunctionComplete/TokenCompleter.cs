@@ -60,6 +60,8 @@ namespace FunctionComplete
             // Typing token is structure with property if conteins dot '.'
             if (currentTypingToken.Contains("."))
             {
+                var lastDot = cleanToken.LastIndexOf(".");
+                result.TokenToCurrent = cleanToken.Remove(lastDot) + ".";
                 string function = string.Empty;
                 // Structure root is function if typing token is ")."
                 // Structure root could also be variable.
