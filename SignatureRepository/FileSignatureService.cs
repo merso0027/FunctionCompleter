@@ -45,7 +45,7 @@ namespace SignatureRepository
         public List<string> GetRawStructures()
         {
             return new List<string>() {
-                      "Task{int a,string b}",
+                      " Task{int a,string b}",
                       " Continent{Europe europe, America america, Africa africa,Asia asia}",
                       " Europe{Country france, Country serbia}",
                       " America{Country usa, Country canada}",
