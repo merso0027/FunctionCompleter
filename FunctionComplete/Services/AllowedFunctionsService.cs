@@ -9,9 +9,19 @@ namespace FunctionComplete.Services
 {
     internal class AllowedFunctionsService
     {
+        /// <summary>
+        /// Get allowed function types based on current function parameter type.
+        /// </summary>
+        /// <param name="token">token value</param>
+        /// <param name="lastWholeFunctionName">last whole function name</param>
+        /// <param name="functions">All functions</param>
+        /// <param name="variables">All varables</param>
+        /// <param name="structures">All structures</param>
+        /// <returns></returns>
         public List<String> GetAllowedFunctionTypes(string token, string lastWholeFunctionName,
              List<FunctionSignature> functions, List<Variable> variables,List<Structure> structures)
         {
+            // If this is no whole function. For example since this is first function.
             if (string.IsNullOrWhiteSpace(lastWholeFunctionName))
             {
                 var func = functions.Select(t => t.ReturnType)
@@ -21,7 +31,7 @@ namespace FunctionComplete.Services
                 var vars = variables.Select(t => t.Type)
                 .Distinct()
                 .ToList();
-
+                //Get all possible types form return types and from varables.
                 return vars.Concat(func).Distinct().ToList();
             }
 
@@ -35,6 +45,12 @@ namespace FunctionComplete.Services
             return allowedTypes.Concat(structureNames).ToList();
         }
 
+        /// <summary>
+        /// Get parameter order in current typing function.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="lastWholeFunctionName"></param>
+        /// <returns></returns>
         private int GetParameterOrder(string token, string lastWholeFunctionName)
         {
             Regex regexObj = new Regex(
@@ -49,8 +65,9 @@ namespace FunctionComplete.Services
                  (?(Depth)(?!))   # Assert that the parens counter is at zero.
                  \)               # Then match a closing parenthesis.",
                 RegexOptions.IgnorePatternWhitespace);
-
+            
             var withoutNestedBrackets = regexObj.Replace(token, string.Empty);
+            // Count parameters is actually count of comma',' without nested brackets.
             int parameterCount = withoutNestedBrackets.Count(f => f == ',');
             return parameterCount;
         }

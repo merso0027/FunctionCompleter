@@ -12,6 +12,10 @@ namespace FunctionComplete.Services
             this.rawStructures = rawStructures;
         }
 
+        /// <summary>
+        /// Get all stuructures
+        /// </summary>
+        /// <returns>Lista of structures</returns>
         public List<Structure> GetAllStructures()
         {
             var cleanRaw = cleanRawStructures(rawStructures);
