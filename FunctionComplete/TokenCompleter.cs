@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace FunctionComplete
 {
-    public class TokenCompleter
+    public class TokenCompleter: ITokenCompleter
     {
         private readonly FunctionCompleteService functionCompleteService;
         private readonly VariableCompleteService variableCompleteService;

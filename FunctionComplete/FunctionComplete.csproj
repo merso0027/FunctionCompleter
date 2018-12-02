@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\SubstringExtensions.cs" />
+    <Compile Include="ITokenCompleter.cs" />
     <Compile Include="Models\Structure.cs" />
     <Compile Include="Models\Variable.cs" />
     <Compile Include="Services\Complete\StructureCompleteService.cs" />
